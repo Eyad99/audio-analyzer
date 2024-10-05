@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { KEY_TOKEN_COOKIE } from '@/variables/constants';
 import Cookies from 'js-cookie';
  
-const baseURL = 'BASE_URL';
+const baseURL = 'http://insights24.pythonanywhere.com/api/upload/a1/';
 export interface ApiResponse<T = any> {
 	data: T;
 	statusCode: number;

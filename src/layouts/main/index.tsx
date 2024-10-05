@@ -1,3 +1,4 @@
+import Navbar from '@/components/widgets/navbar';
 import MainRoutes from '@/routes/main';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -14,12 +15,11 @@ const MainLayout = () => {
 	};
 	document.documentElement.dir = 'ltr';
 	return (
-		<div>
-			<div className='relative float-right h-full min-h-screen w-full dark:!bg-navy-900'>
-				<main className={`mx-auto min-h-screen`}>
-					<Routes>{getRoutes(MainRoutes)}</Routes>
-				</main>
-			</div>
+		<div className='h-full min-h-screen w-full'>
+			<main className={`mx-auto `}>
+				<Navbar />
+				<Routes>{getRoutes(MainRoutes)}</Routes>
+			</main>
 		</div>
 	);
 };
