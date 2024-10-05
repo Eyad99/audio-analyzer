@@ -1,9 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import NotFound from './views/not-found';
-import AdminLayout from '@/layouts/admin';
-import AuthLayout from '@/layouts/auth';
 import '@/assets/css/Plugins.css';
+import MainLayout from './layouts/main';
 
 const App = () => {
 	// Create a new context
@@ -22,7 +21,6 @@ const App = () => {
 		'--color-800': '#190793',
 		'--color-900': '#11047A',
 	});
-	const [mini, setMini] = useState(false);
 
 	// When the theme state changes, this effect will update the CSS variables in the document's root element
 	useEffect(() => {
@@ -35,10 +33,7 @@ const App = () => {
 
 	return (
 		<Routes>
-			<Route path='auth/*' element={<AuthLayout />} />
-			<Route path='admin/*' element={<AdminLayout setMini={setMini} mini={mini} theme={themeApp} setTheme={setThemeApp} />} />
-
-			<Route path='/' element={<Navigate to='/auth/sign-in' replace />} />
+			<Route path='/' element={<MainLayout />} />
 			<Route path='*' element={<NotFound />} />
 		</Routes>
 	);
