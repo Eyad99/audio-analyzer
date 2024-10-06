@@ -31,6 +31,7 @@ const VAudioInformation: FC<VAudioInformationProps> = ({ data }) => {
 							(parseFloat(data?.total_time_spoken.toFixed(2)) + parseFloat(data?.total_time_silence.toFixed(2)))
 						).toFixed(2)}
 						silenceSegments={data?.silence_segments.map((seg: any) => `${seg.start.toFixed(2)}s - ${seg.end.toFixed(2)}s`).join(', ')}
+						allData={data}
 					/>
 				</TabsContent>
 
