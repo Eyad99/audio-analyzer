@@ -1,3 +1,4 @@
+import Footer from '@/components/widgets/footer';
 import Navbar from '@/components/widgets/navbar';
 import MainRoutes from '@/routes/main';
 import React from 'react';
@@ -19,6 +20,7 @@ const MainLayout = () => {
 			<main className={`mx-auto `}>
 				<Navbar />
 				<Routes>{getRoutes(MainRoutes)}</Routes>
+				<Footer />
 			</main>
 		</div>
 	);
