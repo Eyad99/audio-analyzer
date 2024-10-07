@@ -7,3 +7,17 @@ export interface Segment {
 	end: number;
 	segment_audio_path: string;
 }
+
+
+
+export interface  Criterion {
+	match: boolean;
+};
+
+export interface  CriteriaGroup1 {
+	[key: string]: Criterion | CriteriaGroup1;
+};
+
+export interface  AnalysisData {
+	[key: string]: CriteriaGroup1;
+};

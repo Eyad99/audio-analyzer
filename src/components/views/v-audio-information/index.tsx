@@ -39,7 +39,7 @@ const VAudioInformation: FC<VAudioInformationProps> = ({ data }) => {
 					<Speakers segments={data?.data} />
 				</TabsContent>
 				<TabsContent value='qa'>
-					<Qa />
+					<Qa criteriaAnalysis={data.criteria_analysis} />
 				</TabsContent>
 			</Tabs>
 		</div>
