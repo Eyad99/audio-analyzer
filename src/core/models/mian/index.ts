@@ -14,10 +14,10 @@ export interface  Criterion {
 	match: boolean;
 };
 
-export interface  CriteriaGroup1 {
-	[key: string]: Criterion | CriteriaGroup1;
+export interface  CriteriaGroupProps {
+	[key: string]: Criterion | CriteriaGroupProps;
 };
 
 export interface  AnalysisData {
-	[key: string]: CriteriaGroup1;
+	[key: string]: CriteriaGroupProps;
 };

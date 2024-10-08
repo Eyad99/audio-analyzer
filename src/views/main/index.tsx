@@ -365,22 +365,22 @@ const MainPage = () => {
 					},
 					'Assessment and problem solving': {
 						'Provides one-stop shopping': {
-							match: false,
+							match: true,
 						},
 						'Appropriate complaint registry and follow up': {
-							match: false,
+							match: true,
 						},
 						'Asking effective questions and root cause analysis': {
-							match: false,
+							match: true,
 						},
 						'Inform and educate the customer': {
 							match: true,
 						},
 						'Offer suggestions and alternatives': {
-							match: false,
+							match: true,
 						},
 						'Effectively negotiate a mutual beneficial outcome': {
-							match: false,
+							match: true,
 						},
 						'Clearly confirm the action, time frame and process': {
 							match: true,
@@ -430,7 +430,6 @@ const MainPage = () => {
 			},
 		},
 	};
-
 	const { values, errors, touched, setFieldValue } = useFormik({
 		initialValues: initialValues,
 		onSubmit: () => {},
@@ -452,3 +451,105 @@ const MainPage = () => {
 };
 
 export default MainPage;
+
+// import * as React from 'react';
+// const { useMemo, useState, useCallback, useRef } = React;
+// import { createRoot } from 'react-dom/client';
+// import { useWavesurfer } from '@wavesurfer/react';
+// import Timeline from 'wavesurfer.js/dist/plugins/timeline.esm.js';
+// import AudioWaveform from '@/utils/helpers/audioWaveform';
+
+// const formatTime = (seconds: any) => [seconds / 60, seconds % 60].map((v) => `0${Math.floor(v)}`.slice(-2)).join(':');
+
+// // A React component that will render wavesurfer
+// const MainPage = () => {
+// 	const containerRef = useRef(null);
+
+// 	const { wavesurfer, isPlaying, currentTime } = useWavesurfer({
+// 		container: containerRef,
+// 		height: 100,
+// 		waveColor: 'rgb(200, 0, 200)',
+// 		progressColor: 'rgb(100, 0, 100)',
+// 		// url: '/audio.wav',
+// 		url: 'https://corsproxy.io/?https://insights24.pythonanywhere.com/media/audio/20241008-164416_1877/Agent_2.06_3.30.wav',
+// 		// url: 'https://corsproxy.io/?blob:https://insights24.pythonanywhere.com/e790e501-95d2-418d-a338-d33f687184d4',
+// 		// plugins: useMemo(() => [Timeline.create()], []),
+// 	});
+
+// 	const onPlayPause = useCallback(() => {
+// 		wavesurfer && wavesurfer.playPause();
+// 	}, [wavesurfer]);
+
+// 	return (
+// 		<>
+// 			<div ref={containerRef} />
+
+// 			<p>Current time: {formatTime(currentTime)}</p>
+
+// 			<div style={{ margin: '1em 0', display: 'flex', gap: '1em' }}>
+// 				<button onClick={onPlayPause} style={{ minWidth: '5em' }}>
+// 					{isPlaying ? 'Pause' : 'Play'}
+// 				</button>
+// 			</div>
+// 			{/* <AudioWaveform audioUrl={`/audio.wav`} playing={true} /> */}
+// 		</>
+// 	);
+// };
+
+// export default MainPage;
+
+// import React, { useEffect, useRef } from 'react';
+// import WaveSurfer from 'wavesurfer.js';
+// import Hover from 'wavesurfer.js/dist/plugins/hover.esm.js';
+
+// const MainPage = () => {
+// 	const containerRef = useRef(null);
+// 	const waveSurferRef = useRef<WaveSurfer | null>(null);
+
+// 	useEffect(() => {
+// 		if (!containerRef.current) return;
+
+// 		// Initialize WaveSurfer
+// 		waveSurferRef.current = WaveSurfer.create({
+// 			container: containerRef.current,
+// 			waveColor: 'purple',
+// 			height: 100,
+// 			plugins: [
+// 				Hover.create({
+// 					lineColor: '#ff0000',
+// 					lineWidth: 2,
+// 					labelBackground: '#555',
+// 					labelColor: '#fff',
+// 					labelSize: '11px',
+// 				}),
+// 			],
+// 		});
+
+// 		// Load audio from the provided URL
+// 		// waveSurferRef.current.load('http://insights24.pythonanywhere.com/media/audio/20241008-164416_1877/Agent_2.06_3.30.wav');
+// 		waveSurferRef.current.load(
+// 			'https://corsproxy.io/?https://insights24.pythonanywhere.com/media/audio/20241008-164416_1877/Agent_2.06_3.30.wav'
+// 		);
+
+// 		return () => {
+// 			if (waveSurferRef.current) {
+// 				waveSurferRef.current.destroy();
+// 			}
+// 		};
+// 	}, []);
+
+// 	const onPlayPause = () => {
+// 		if (waveSurferRef.current) {
+// 			waveSurferRef.current.playPause();
+// 		}
+// 	};
+
+// 	return (
+// 		<div>
+// 			<div ref={containerRef} />
+// 			<button onClick={onPlayPause}>Play / Pause</button>
+// 		</div>
+// 	);
+// };
+
+// export default MainPage;

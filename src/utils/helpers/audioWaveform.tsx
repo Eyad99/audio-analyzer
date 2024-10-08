@@ -18,7 +18,8 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, onRead
 			container: waveformRef.current,
 			waveColor: '#4F4A85',
 			progressColor: '#383351',
-			height: 80,
+			height: 50,
+			// width: 30,
 			// responsive: true,
 			barWidth: 2,
 		});
