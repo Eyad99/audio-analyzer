@@ -68,7 +68,7 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 					<CardHeader className='p-6'>
 						<CardTitle className='text-2xl font-bold'>QA Call Card Analysis</CardTitle>
 						<div className='mt-4'>
-							<Progress value={overallPercentage} className='h-4' />
+							<Progress value={overallPercentage} className='h-4' indicatorColor='bg-[#383351]' />
 							<div className='flex justify-between items-center mt-2'>
 								<span className='text-sm text-muted-foreground'>Overall Score</span>
 								<span className='text-2xl font-bold'>{overallPercentage}%</span>
@@ -106,7 +106,7 @@ function CriteriaGroup({ name, data, setFieldValue }: { name: string; data: Crit
 						{isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
 					</Button>
 				</CardTitle>
-				<Progress value={percentage} className='h-2' />
+				<Progress value={percentage} className='h-2' indicatorColor='bg-[#383351]' />
 				<div className='text-sm text-muted-foreground mt-2'>{percentage}% Completed</div>
 			</CardHeader>
 			{isOpen && (
