@@ -1,14 +1,18 @@
-import React, { FC, useState } from 'react';
-import { ChevronDown, ChevronUp, Check, X, Pause, Play } from 'lucide-react';
-import { Progress } from '@/components/ui/progress';
+import { FC, useState } from 'react';
+import { ChevronDown, ChevronUp, Check, X, Pause, Play, Pencil } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { AnalysisData, CriteriaGroupProps } from '@/core';
+import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
 import AudioWaveform from '@/utils/helpers/audioWaveform';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import TextField from '@/components/reusable/fields/TextField';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface QaProps {
 	criteriaAnalysis: AnalysisData;
 	sound: string | undefined;
+	setFieldValue: any;
 }
 
 // Recursive function to calculate matches and totals for nested structures
@@ -34,7 +38,7 @@ function calculateMatchPercentage(data: CriteriaGroupProps): { matchCount: numbe
 	return { matchCount, totalCount };
 }
 
-const Qa: FC<QaProps> = ({ criteriaAnalysis, sound }) => {
+const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 	const overallMatchData = calculateMatchPercentage(criteriaAnalysis);
 	const overallPercentage = Math.round((overallMatchData.matchCount / overallMatchData.totalCount) * 100);
 
@@ -48,10 +52,14 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound }) => {
 			<div className='w-[5%]'>
 				<div className='flex flex-col gap-4 items-center  '>
 					<Button size='sm' variant='ghost' onClick={() => playAudio(!playingSegment)}>
-						{playingSegment ? <Pause className='h-4 w-4' /> : <Play className='h-4 w-4' />}
+						{playingSegment ? (
+							<Pause className='text-[#383351]' size={28} strokeWidth={2} />
+						) : (
+							<Play className='text-[#383351]' size={28} strokeWidth={2} />
+						)}
 					</Button>
 					<div className='w-full rotate-90 '>
-						<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} />
+						<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} height={50} />
 					</div>
 				</div>
 			</div>
@@ -69,18 +77,26 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound }) => {
 					</CardHeader>
 				</Card>
 				{Object.entries(criteriaAnalysis).map(([key, value]) => (
-					<CriteriaGroup key={key} name={key} data={value} />
+					<CriteriaGroup key={key} name={key} data={value} setFieldValue={setFieldValue} />
 				))}
 			</div>
 		</section>
 	);
 };
 
-function CriteriaGroup({ name, data }: { name: string; data: CriteriaGroupProps }) {
+function CriteriaGroup({ name, data, setFieldValue }: { name: string; data: CriteriaGroupProps; setFieldValue: any }) {
 	const [isOpen, setIsOpen] = useState(false);
+	const [editScore, setEditScore] = useState('');
 	const matchData = calculateMatchPercentage(data);
+
 	const percentage = Math.round((matchData.matchCount / matchData.totalCount) * 100);
 
+	const handleSelectScoreToEditIt = (row: string) => {
+		setEditScore(row);
+	};
+	const handeEditOnScore = (name: string, key: string, newScore: string) => {
+		setFieldValue(`data.criteria_analysis.${name}.${key}.score`, newScore);
+	};
 	return (
 		<Card className='mb-4'>
 			<CardHeader className='p-4'>
@@ -99,10 +115,62 @@ function CriteriaGroup({ name, data }: { name: string; data: CriteriaGroupProps 
 						'match' in value ? (
 							<div key={key} className='flex justify-between items-center py-2 border-b last:border-b-0'>
 								<span className='text-sm'>{key}</span>
-								{value.match ? <Check className='text-green-500' size={20} /> : <X className='text-destructive' size={20} />}
+								<div className='flex items-center  gap-4'>
+									{/* Reason */}
+									{[1, 2, 5].includes(value?.score) && (
+										<DropdownMenu>
+											<DropdownMenuTrigger>
+												<div className='flex items-center justify-center text-gray-600'>
+													<span>Reason</span>
+													<ChevronDown size={20} className='relative top-[2px]' />
+												</div>
+											</DropdownMenuTrigger>
+											<DropdownMenuContent>
+												<DropdownMenuItem>
+													<span>{value?.reason}</span>
+												</DropdownMenuItem>
+											</DropdownMenuContent>
+										</DropdownMenu>
+									)}
+									{/* Edit Score */}
+									<TooltipProvider>
+										<Tooltip>
+											<TooltipTrigger asChild>
+												<Pencil className='text-[#383351]' size={20} onClick={() => handleSelectScoreToEditIt(key)} />
+											</TooltipTrigger>
+											<TooltipContent>
+												<span>Edit on score</span>
+											</TooltipContent>
+										</Tooltip>
+									</TooltipProvider>
+									{/* Score */}
+									{editScore == key ? (
+										<TextField
+											name={'reason'}
+											onBlur={() => handleSelectScoreToEditIt('')}
+											onChange={(event) => handeEditOnScore(name, key, event.target.value)}
+											type={'number'}
+											min={1}
+											max={5}
+											onKeyDown={(event) => event.key == 'Enter' && handleSelectScoreToEditIt('')}
+										/>
+									) : (
+										<span
+											className={
+												[1, 2].includes(+value?.score)
+													? 'text-red-500'
+													: [3, 4]?.includes(+value?.score)
+													? 'text-blue-500'
+													: 'text-green-500'
+											}
+										>
+											{value?.score}
+										</span>
+									)}
+								</div>
 							</div>
 						) : (
-							<CriteriaGroup key={key} name={key} data={value as CriteriaGroupProps} />
+							<CriteriaGroup key={key} name={key} data={value as CriteriaGroupProps} setFieldValue={setFieldValue} />
 						)
 					)}
 				</CardContent>

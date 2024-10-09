@@ -8,16 +8,16 @@ export interface Segment {
 	segment_audio_path: string;
 }
 
-
-
-export interface  Criterion {
+export interface Criterion {
 	match: boolean;
-};
+	score: number;
+	reason?: string;
+}
 
-export interface  CriteriaGroupProps {
-	[key: string]: Criterion | CriteriaGroupProps;
-};
+export interface CriteriaGroupProps {
+	[key: string]: Criterion | CriteriaGroupProps | any;
+}
 
-export interface  AnalysisData {
+export interface AnalysisData {
 	[key: string]: CriteriaGroupProps;
-};
+}

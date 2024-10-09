@@ -266,168 +266,245 @@ const MainPage = () => {
 			Greeting: {
 				'Immediate attention to customer': {
 					match: true,
+					score: 4,
 				},
 				'Identify self and the organization': {
 					match: false,
+					score: 3,
 				},
 				'Clear and timely greeting': {
 					match: false,
+					score: 2,
+					reason: 'Needs improvement to meet the expected level.',
 				},
 				'Ready and willing to help': {
 					match: false,
+					score: 5,
+					reason: 'Exceeded expectations.',
 				},
 				'Friendly / energetic voice tone - smiling voice': {
 					match: false,
+					score: 4,
 				},
 			},
-			'Telephone Etiquette': {
+			Understanding: {
 				'Follow hold protocol': {
 					match: false,
+					score: 1,
+					reason: 'Did not meet the standard requirements.',
 				},
 				'Follow call redirect protocol': {
 					match: false,
+					score: 2,
+					reason: 'Needs improvement to meet the expected level.',
 				},
 				'Portrays positive customer service attitude': {
 					match: false,
+					score: 2,
+					reason: 'Needs improvement to meet the expected level.',
 				},
 				'Confirm and use customers name': {
 					match: false,
+					score: 1,
+					reason: 'Did not meet the standard requirements.',
 				},
 				'Use protocol of asking security question': {
 					match: false,
+					score: 3,
 				},
 			},
-			'Customer Care Skills': {
+			Helping: {
 				Listening: {
 					'Customer does not have to repeat unnecessarily': {
 						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
 					},
 					'Agent does not interrupt (except for talkative customer)': {
 						match: false,
+						score: 2,
+						reason: 'Needs improvement to meet the expected level.',
 					},
 					'Demonstrates empathy / compassion': {
 						match: false,
+						score: 3,
 					},
 					'Confirms understanding (repeat and reinstate)': {
 						match: false,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 				},
 				Speaking: {
 					'Professional tone': {
 						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
 					},
 					'Use of appropriate language / word choice': {
 						match: false,
+						score: 2,
+						reason: 'Needs improvement to meet the expected level.',
 					},
 					'Pleasant voice': {
 						match: false,
+						score: 2,
+						reason: 'Needs improvement to meet the expected level.',
 					},
 					'Avoid abbreviation / jargons': {
 						match: false,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 				},
 				'Call Control': {
 					'Efficient use of time': {
 						match: true,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
 					},
 					'Agent takes control of the call': {
 						match: false,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 					'Displays confidence': {
 						match: false,
+						score: 4,
 					},
 					"Identifies and verifies the customer's need": {
 						match: false,
+						score: 3,
 					},
 					'Escalates calls appropriately': {
 						match: false,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 				},
 				'Difficult call handling': {
 					'Do show empathy': {
 						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
 					},
 					'Do apologize for the inconvenience': {
 						match: false,
+						score: 2,
+						reason: 'Needs improvement to meet the expected level.',
 					},
 					'Diffuses anger': {
 						match: false,
+						score: 3,
 					},
 					'Maintain positive attitude throughout the call': {
 						match: false,
+						score: 3,
 					},
 					'Allow customer to vent anger': {
 						match: false,
+						score: 4,
 					},
 					'Avoid being argumentative': {
 						match: false,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 					'Able to deliver negative decisions / results': {
 						match: false,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 				},
 				'Assessment and problem solving': {
 					'Provides one-stop shopping': {
 						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 					'Appropriate complaint registry and follow up': {
 						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 					'Asking effective questions and root cause analysis': {
 						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 					'Inform and educate the customer': {
 						match: true,
+						score: 15,
 					},
 					'Offer suggestions and alternatives': {
 						match: true,
+						score: 15,
 					},
 					'Effectively negotiate a mutual beneficial outcome': {
 						match: true,
+						score: 15,
 					},
 					'Clearly confirm the action, time frame and process': {
 						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 				},
 			},
-			'Basic Job Technical Knowledge and Skills': {
+			'Setting Agreement': {
 				Product: {
 					'Provides consistent and accurate product features': {
 						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
 					},
 					Pricing: {
 						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
 					},
 					Documentation: {
 						match: false,
+						score: 4,
 					},
 					Eligibility: {
 						match: false,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 				},
 				Selling: {
 					"Identify customer's need": {
 						match: false,
+						score: 3,
 					},
 					'Use consultative selling (right product to right customer)': {
 						match: false,
+						score: 3,
 					},
 				},
 				'Process and procedures': {
 					'Good knowledge of policies / processes / procedures': {
 						match: false,
+						score: 5,
+						reason: 'Exceeded expectations.',
 					},
 				},
 			},
-			Closing: {
+			Farewell: {
 				'Ask for another assistance': {
 					match: true,
+					score: 3,
 				},
 				'Standard close': {
 					match: true,
+					score: 5,
+					reason: 'Exceeded expectations.',
 				},
 				'Friendly close': {
 					match: false,
+					score: 1,
+					reason: 'Did not meet the standard requirements.',
 				},
 			},
 		},
@@ -474,14 +551,11 @@ const MainPage = () => {
 
 	const uploadAudioMutate = useMutateData({
 		mutationFn: (data: any) => mainApi.upoadAudio(data),
-		onSuccessFn: ({ data, variables }) => {
-			console.log(' data, variables', data, variables);
-		},
 	});
 
 	return (
 		<div className='min-h-[83vh]'>
-			{values.data && <VAudioInformation data={values.data} sound={values.fileBlob} />}
+			{values.data && <VAudioInformation data={values.data} sound={values.fileBlob} setFieldValue={setFieldValue} />}
 
 			{!values.data && (
 				<form onSubmit={handleSubmitFormik} className='min-h-[83vh]'>

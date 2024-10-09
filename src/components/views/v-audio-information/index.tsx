@@ -7,9 +7,10 @@ import Qa from './qa';
 interface VAudioInformationProps {
 	data?: any;
 	sound?: string;
+	setFieldValue?: any;
 }
 
-const VAudioInformation: FC<VAudioInformationProps> = ({ data, sound }) => {
+const VAudioInformation: FC<VAudioInformationProps> = ({ data, sound, setFieldValue }) => {
 	return (
 		<div className='mx-6 p-4'>
 			<Tabs defaultValue='call_phases' className='w-full'>
@@ -20,7 +21,7 @@ const VAudioInformation: FC<VAudioInformationProps> = ({ data, sound }) => {
 
 				<div className='p-4 bg-white shadow-[0_0_40px_rgba(8,21,66,0.05)] rounded-md'>
 					<TabsContent value='call_phases'>
-						<Qa criteriaAnalysis={data.criteria_analysis} sound={sound} />
+						<Qa criteriaAnalysis={data.criteria_analysis} sound={sound} setFieldValue={setFieldValue} />
 					</TabsContent>
 
 					<TabsContent value='call_transcribed' className='flex flex-col gap-4'>
