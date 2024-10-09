@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Pause, Play, User, UserCircle2 } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 import { Segment } from '@/core';
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
@@ -21,8 +22,9 @@ const Speakers: FC<SpeakersProps> = ({ segments }) => {
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Speakers and Segments Analysis</CardTitle>
+				<CardTitle className='text-[#4F4A85] font-bold'>Speakers and Segments Analysis</CardTitle>
 			</CardHeader>
+			<Separator orientation='horizontal' className='h-[1px] bg-gray-200 px-4 w-1/2' />
 			<CardContent>
 				<ScrollArea className='flex-grow p-4'>
 					{segments.map((segment, index) => (
@@ -32,7 +34,7 @@ const Speakers: FC<SpeakersProps> = ({ segments }) => {
 									{segment.speaker === 'Agent' ? <UserCircle2 className='h-6 w-6' /> : <User className='h-6 w-6' />}
 								</Avatar>
 								<div
-									className={`max-w-lg mx-2 p-3 rounded-md ${
+									className={`max-w-2xl mx-2 p-3 rounded-md ${
 										segment.speaker === 'Agent'
 											? 'bg-primary text-white rounded-bl-[25px]'
 											: 'bg-white border border-gray-300 rounded-br-[25px]'

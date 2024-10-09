@@ -3,7 +3,7 @@ import { KEY_TOKEN_COOKIE } from '@/variables/constants';
 import Cookies from 'js-cookie';
 import { ObjToFormData } from '../helpers';
 
-const baseURL = 'https://insights24.pythonanywhere.com/';
+const baseURL = 'http://insights24.pythonanywhere.com/';
 export interface ApiResponse<T = any> {
 	data: T;
 	statusCode: number;

@@ -435,9 +435,10 @@ const MainPage = () => {
 
 	const initialValues = {
 		file: null,
-		fileBase64: null,
+		fileBlob: '',
 		lang: 'en',
-		data: reaData,
+		data: null,
+		loading: false,
 	};
 
 	const validationSchema = yup.object().shape({
@@ -449,7 +450,12 @@ const MainPage = () => {
 			}),
 	});
 	const handleSubmit = (data: any) => {
-		uploadAudioMutate.mutate(data);
+		setFieldValue('loading', true);
+
+		setFieldValue('data', reaData);
+		setFieldValue('fileBlob', URL.createObjectURL(data.file));
+
+		setFieldValue('loading', false);
 	};
 
 	const {
@@ -473,11 +479,9 @@ const MainPage = () => {
 		},
 	});
 
-	// console.log('values', URL.createObjectURL(values?.file));
-
 	return (
 		<div className='min-h-[83vh]'>
-			{values.data && <VAudioInformation data={values.data} />}
+			{values.data && <VAudioInformation data={values.data} sound={values.fileBlob} />}
 
 			{!values.data && (
 				<form onSubmit={handleSubmitFormik} className='min-h-[83vh]'>
@@ -486,7 +490,9 @@ const MainPage = () => {
 						<h1 className='text-sm sm:text-lg'>Upload an audio file of type (wav) to view the analysis results here.</h1>
 
 						<Uploader
-							onChange={(files: any) => setFieldValue('file', files)}
+							onChange={(files: any) => {
+								setFieldValue('file', files);
+							}}
 							fileTypes={{ audio: ['.wav'] }}
 							errors={errors.file as any}
 							error={!!touched.file && !!errors.file}
@@ -510,8 +516,8 @@ const MainPage = () => {
 							/>
 						</div>
 
-						<Button variant={'blue'} disabled={uploadAudioMutate.isPending || !values.file} size={'lg'}>
-							{uploadAudioMutate.isPending ? (
+						<Button variant={'blue'} disabled={values.loading || !values.file} size={'lg'}>
+							{values.loading ? (
 								<div className='flex gap-2'>
 									<span>{'Upload'}</span>
 									<LoaderIcon className='animate-spin' />

@@ -1,94 +1,14 @@
-// import React, { FC, useState } from 'react';
-// import { ChevronDown, ChevronUp, Check, X } from 'lucide-react';
-// import { Progress } from '@/components/ui/progress';
-// import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-// import { Button } from '@/components/ui/button';
-// import { AnalysisData, CriteriaGroupProps } from '@/core';
-
-// interface QaProps {
-// 	criteriaAnalysis: AnalysisData;
-// }
-
-// function CriteriaGroup({ name, data }: { name: string; data: CriteriaGroupProps }) {
-// 	const [isOpen, setIsOpen] = useState(false);
-// 	const matchCount = Object.values(data).filter((item) => 'match' in item && item.match).length;
-// 	const totalCount = Object.values(data).filter((item) => 'match' in item).length;
-// 	const percentage = Math.round((matchCount / totalCount) * 100);
-// 	console.log('matchCountmatchCount', matchCount, totalCount);
-
-// 	return (
-// 		<Card className='mb-4'>
-// 			<CardHeader className='p-4'>
-// 				<CardTitle className='flex justify-between items-center'>
-// 					<span>{name}</span>
-// 					<Button variant='ghost' size='sm' onClick={() => setIsOpen(!isOpen)}>
-// 						{isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-// 					</Button>
-// 				</CardTitle>
-// 				<Progress value={percentage} className='h-2' />
-// 				<div className='text-sm text-muted-foreground mt-2'>{percentage}% Completed</div>
-// 			</CardHeader>
-// 			{isOpen && (
-// 				<CardContent className='p-4'>
-// 					{Object.entries(data).map(([key, value]) =>
-// 						'match' in value ? (
-// 							<div key={key} className='flex justify-between items-center py-2 border-b last:border-b-0'>
-// 								<span className='text-sm'>{key}</span>
-// 								{value.match ? <Check className='text-green-500' size={20} /> : <X className='text-destructive' size={20} />}
-// 							</div>
-// 						) : (
-// 							<CriteriaGroup key={key} name={key} data={value as CriteriaGroupProps} />
-// 						)
-// 					)}
-// 				</CardContent>
-// 			)}
-// 		</Card>
-// 	);
-// }
-// const Qa: FC<QaProps> = ({ criteriaAnalysis }) => {
-// 	const overallPercentage = Math.round(
-// 		(Object.values(criteriaAnalysis)
-// 			.flatMap((group) => Object.values(group).filter((item) => 'match' in item && item.match).length)
-// 			.reduce((a, b) => a + b, 0) /
-// 			Object.values(criteriaAnalysis)
-// 				.flatMap((group) => Object.values(group).filter((item) => 'match' in item).length)
-// 				.reduce((a, b) => a + b, 0)) *
-// 			100
-// 	);
-// 	return (
-// 		// <div className='max-w-4xl mx-auto p-6 bg-background'>
-// 		<React.Fragment>
-// 			<Card className='mb-6'>
-// 				<CardHeader className='p-6'>
-// 					<CardTitle className='text-2xl font-bold'>QA Call Card Analysis</CardTitle>
-// 					<div className='mt-4'>
-// 						<Progress value={overallPercentage} className='h-4' />
-// 						<div className='flex justify-between items-center mt-2'>
-// 							<span className='text-sm text-muted-foreground'>Overall Score</span>
-// 							<span className='text-2xl font-bold'>{overallPercentage}%</span>
-// 						</div>
-// 					</div>
-// 				</CardHeader>
-// 			</Card>
-// 			{Object.entries(criteriaAnalysis).map(([key, value]) => (
-// 				<CriteriaGroup key={key} name={key} data={value} />
-// 			))}
-// 		</React.Fragment>
-// 		// </div>
-// 	);
-// };
-
-// export default Qa;
-
 import React, { FC, useState } from 'react';
-import { ChevronDown, ChevronUp, Check, X } from 'lucide-react';
+import { ChevronDown, ChevronUp, Check, X, Pause, Play } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AnalysisData, CriteriaGroupProps } from '@/core';
+import AudioWaveform from '@/utils/helpers/audioWaveform';
 
 interface QaProps {
 	criteriaAnalysis: AnalysisData;
+	sound: string | undefined;
 }
 
 // Recursive function to calculate matches and totals for nested structures
@@ -114,28 +34,45 @@ function calculateMatchPercentage(data: CriteriaGroupProps): { matchCount: numbe
 	return { matchCount, totalCount };
 }
 
-const Qa: FC<QaProps> = ({ criteriaAnalysis }) => {
+const Qa: FC<QaProps> = ({ criteriaAnalysis, sound }) => {
 	const overallMatchData = calculateMatchPercentage(criteriaAnalysis);
 	const overallPercentage = Math.round((overallMatchData.matchCount / overallMatchData.totalCount) * 100);
 
+	const [playingSegment, setPlayingSegment] = useState<boolean>(false);
+
+	const playAudio = (play: boolean) => {
+		setPlayingSegment(play);
+	};
 	return (
-		<React.Fragment>
-			<Card className='mb-6'>
-				<CardHeader className='p-6'>
-					<CardTitle className='text-2xl font-bold'>QA Call Card Analysis</CardTitle>
-					<div className='mt-4'>
-						<Progress value={overallPercentage} className='h-4' />
-						<div className='flex justify-between items-center mt-2'>
-							<span className='text-sm text-muted-foreground'>Overall Score</span>
-							<span className='text-2xl font-bold'>{overallPercentage}%</span>
-						</div>
+		<section className='flex'>
+			<div className='w-[5%]'>
+				<div className='flex flex-col gap-4 items-center  '>
+					<Button size='sm' variant='ghost' onClick={() => playAudio(!playingSegment)}>
+						{playingSegment ? <Pause className='h-4 w-4' /> : <Play className='h-4 w-4' />}
+					</Button>
+					<div className='w-full rotate-90 '>
+						<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} />
 					</div>
-				</CardHeader>
-			</Card>
-			{Object.entries(criteriaAnalysis).map(([key, value]) => (
-				<CriteriaGroup key={key} name={key} data={value} />
-			))}
-		</React.Fragment>
+				</div>
+			</div>
+			<div className='w-[95%]'>
+				<Card className='mb-6'>
+					<CardHeader className='p-6'>
+						<CardTitle className='text-2xl font-bold'>QA Call Card Analysis</CardTitle>
+						<div className='mt-4'>
+							<Progress value={overallPercentage} className='h-4' />
+							<div className='flex justify-between items-center mt-2'>
+								<span className='text-sm text-muted-foreground'>Overall Score</span>
+								<span className='text-2xl font-bold'>{overallPercentage}%</span>
+							</div>
+						</div>
+					</CardHeader>
+				</Card>
+				{Object.entries(criteriaAnalysis).map(([key, value]) => (
+					<CriteriaGroup key={key} name={key} data={value} />
+				))}
+			</div>
+		</section>
 	);
 };
 

@@ -5,9 +5,11 @@ interface AudioWaveformProps {
 	audioUrl: string;
 	playing: boolean;
 	onReady?: () => void;
+	width?: number | string;
+	height?: number;
 }
 
-const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, onReady }) => {
+const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, onReady, width = undefined, height = 50 }) => {
 	const waveformRef = useRef<HTMLDivElement | null>(null);
 	const wavesurferRef = useRef<WaveSurfer | null>(null);
 
@@ -18,9 +20,8 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, onRead
 			container: waveformRef.current,
 			waveColor: '#4F4A85',
 			progressColor: '#383351',
-			height: 50,
-			// width: 30,
-			// responsive: true,
+			height: height,
+			width: width,
 			barWidth: 2,
 		});
 
