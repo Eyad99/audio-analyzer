@@ -17,10 +17,10 @@ const VAudioInformation: FC<VAudioInformationProps> = ({ data, sound, setFieldVa
 			<Tabs defaultValue='call_phases' className='w-full'>
 				<div className='p-4 bg-white shadow-[0_0_40px_rgba(8,21,66,0.05)] rounded-md'>
 					<TabsList className='mb-4 bg-transparent'>
-						<TabsTrigger value='call_phases' className=' data-[state=active]:border-primary data-[state=active]:bg-[#a399d7]'>
+						<TabsTrigger value='call_phases' className=' data-[state=active]:border-primary data-[state=active]:bg-[#baafef]'>
 							Call Phases
 						</TabsTrigger>
-						<TabsTrigger value='call_transcribed' className=' data-[state=active]:border-primary data-[state=active]:bg-[#a399d7]'>
+						<TabsTrigger value='call_transcribed' className=' data-[state=active]:border-primary data-[state=active]:bg-[#baafef""]'>
 							Call Transcribed
 						</TabsTrigger>
 					</TabsList>
