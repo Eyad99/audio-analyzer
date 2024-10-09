@@ -19,6 +19,7 @@ import {
 
 const FileLists = ({ files }: any) => {
 	const thumbs = files?.map((fileObj: any, index: number) => {
+		console.log('fileObj', fileObj);
 		const type = fileObj?.type;
 		const fileName = fileObj?.name;
 

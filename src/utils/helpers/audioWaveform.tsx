@@ -49,3 +49,14 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, onRead
 };
 
 export default AudioWaveform;
+// 			plugins: [
+// 				Hover.create({
+// 					lineColor: '#ff0000',
+// 					lineWidth: 2,
+// 					labelBackground: '#555',
+// 					labelColor: '#fff',
+// 					labelSize: '11px',
+// 				}),
+// 			],
+// import Hover from 'wavesurfer.js/dist/plugins/hover.esm.js';
+// http://insights24.pythonanywhere.com/media/audio/20241008-164416_1877/Agent_2.06_3.30.wav

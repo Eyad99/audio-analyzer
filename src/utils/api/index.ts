@@ -1,14 +1,13 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { KEY_TOKEN_COOKIE } from '@/variables/constants';
 import Cookies from 'js-cookie';
- 
-const baseURL = 'http://insights24.pythonanywhere.com/api/upload/a1/';
+import { ObjToFormData } from '../helpers';
+
+const baseURL = 'https://insights24.pythonanywhere.com/';
 export interface ApiResponse<T = any> {
 	data: T;
 	statusCode: number;
 	message: string;
-	meta: { currentPage: number; itemsPerPage: number; totalItems: number; totalPages: number; sortBy: [] } | null;
-	link: { current: string };
 }
 
 const api: AxiosInstance = axios.create({
@@ -22,7 +21,11 @@ const api: AxiosInstance = axios.create({
 api.interceptors.request.use(
 	(config: any) => {
 		config.headers['Authorization'] = `Bearer ${Cookies.get(KEY_TOKEN_COOKIE)}`;
-
+		if (Boolean(config.headers.formData)) {
+			config.data = ObjToFormData(config.data, undefined, undefined);
+			// Set Content-Type to undefined to let Axios set it automatically for FormData
+			delete config.headers['Content-Type'];
+		}
 		return config;
 	},
 	(error) => Promise.reject(error)
@@ -33,7 +36,7 @@ api.interceptors.response.use(
 	(error) => {
 		if (error.response) {
 			if (error.response.statusCode === 401) {
-				window.location.href = '/auth/sign-in';
+				window.location.href = '/';
 			} else {
 				// Handle other response errors
 

@@ -1,5 +1,5 @@
 import { post } from '@/utils/api';
 
 export const mainApi = {
-	signin: (data: any) => post(`login`, data),
+	upoadAudio: (data: any) => post(`api/upload/a1/`, data, { headers: { formData: true } }),
 };

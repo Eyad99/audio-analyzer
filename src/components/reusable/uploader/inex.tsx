@@ -25,7 +25,6 @@ const Uploader = ({ onChange, singleFile, fileTypes, fileSize, placeholder, valu
 	const rejectStyle = {
 		borderColor: '#ff1744',
 	};
-
 	return (
 		<UploaderAsFormData
 			baseStyle={baseStyle}
