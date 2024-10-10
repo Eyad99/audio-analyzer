@@ -44,31 +44,23 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 	const overallPercentage = Math.round((overallMatchData.matchCount / overallMatchData.totalCount) * 100);
 
 	const [playingSegment, setPlayingSegment] = useState<boolean>(false);
-	// const wsRegions = RegionsPlugin.create();
-	let addRegionCallback: (region: { start: number; end: number; content: string; color: string }) => void;
+	const [hoveredLabel, setHoveredLabel] = useState<string | undefined>(undefined);
 
 	const playAudio = (play: boolean) => {
 		setPlayingSegment(play);
 	};
 
-	const random = (min: number, max: number) => Math.random() * (max - min) + min;
-	const randomColor = () => `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 0.5)`;
+	const handleMouseEnter = (label: string) => {
+		setHoveredLabel(label);
+	};
 
-	// const sdfdsfsd = () => {
-	// 	if (addRegionCallback) {
-	// 		addRegionCallback({
-	// 			start: 10,
-	// 			end: 40,
-	// 			content: 'Start1',
-	// 			color: randomColor(),
-	// 		});
-	// 	}
-	// };
+	const handleMouseLeave = () => {
+		setHoveredLabel(undefined);
+	};
 
 	return (
 		<section className='flex'>
 			<div className='w-[5%]'>
-				{/* <button onClick={() => sdfdsfsd()}>Clicl me </button> */}
 				<div className='flex flex-col gap-4 items-center  '>
 					<Button size='sm' variant='ghost' onClick={() => playAudio(!playingSegment)}>
 						{playingSegment ? (
@@ -78,16 +70,7 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 						)}
 					</Button>
 					<div className='w-full rotate-90 '>
-						<AudioWaveform
-							audioUrl={`${sound}`}
-							playing={playingSegment}
-							width={700}
-							height={50}
-							// onReady={(callback: any) => {
-							// 	console.log('callbackcallbackcallback', callback);
-							// 	addRegionCallback = callback; // Store the callback
-							// }}
-						/>
+						<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} height={50} hoveredLabel={hoveredLabel} />
 					</div>
 				</div>
 			</div>
@@ -106,7 +89,9 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 					</CardHeader>
 				</Card>
 				{Object.entries(criteriaAnalysis).map(([key, value]) => (
-					<CriteriaGroup key={key} name={key} data={value} setFieldValue={setFieldValue} />
+					<div key={key} onMouseEnter={() => handleMouseEnter(key)} onMouseLeave={handleMouseLeave}>
+						<CriteriaGroup name={key} data={value} setFieldValue={setFieldValue} />
+					</div>
 				))}
 			</div>
 		</section>
