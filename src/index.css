@@ -20,13 +20,35 @@
 body {
 	min-width: 320px;
 	min-height: 100vh;
-  background-color: #F5F8FE;
+	background-color: #f5f8fe;
 }
 
+#waveform {
+	transform: translateY(100%) rotate(90deg);
+	transform-origin: 50% 50%;
+}
+
+
+#waveform ::part(region-green) {
+	background-color: rgba(0, 100, 0, 0.25) !important;
+	font-size: 12px;
+	text-shadow: 0 0 2px #fff;
+  }
+  
+/* #v-container{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+}
+#wave{
+	transform: translateX(100%) rotate(90deg);
+	transform-origin: top left;
+} */
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;
-		background-color: #F5F8FE;
+		background-color: #f5f8fe;
 	}
 }
 

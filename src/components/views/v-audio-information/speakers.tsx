@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { Segment } from '@/core';
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
-import AudioWaveform from '@/utils/helpers/audioWaveform';
+import AudioWaveformSpeacker from '@/utils/helpers/audioWaveform-speacker';
 
 interface SpeakersProps {
 	segments: Segment[];
@@ -48,7 +48,7 @@ const Speakers: FC<SpeakersProps> = ({ segments }) => {
 												{playingSegment === index ? <Pause className='h-4 w-4' /> : <Play className='h-4 w-4' />}
 											</Button>
 											<div className='ml-2 w-full'>
-												<AudioWaveform
+												<AudioWaveformSpeacker
 													// audioUrl={`http://insights24.pythonanywhere.com/media/${segment.segment_audio_path}`}
 													audioUrl={`https://corsproxy.io/?https://insights24.pythonanywhere.com/media/${segment.segment_audio_path}`}
 													playing={playingSegment === index}

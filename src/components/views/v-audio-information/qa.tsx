@@ -8,6 +8,7 @@ import AudioWaveform from '@/utils/helpers/audioWaveform';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import TextField from '@/components/reusable/fields/TextField';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.esm.js';
 
 interface QaProps {
 	criteriaAnalysis: AnalysisData;
@@ -43,13 +44,31 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 	const overallPercentage = Math.round((overallMatchData.matchCount / overallMatchData.totalCount) * 100);
 
 	const [playingSegment, setPlayingSegment] = useState<boolean>(false);
+	// const wsRegions = RegionsPlugin.create();
+	let addRegionCallback: (region: { start: number; end: number; content: string; color: string }) => void;
 
 	const playAudio = (play: boolean) => {
 		setPlayingSegment(play);
 	};
+
+	const random = (min: number, max: number) => Math.random() * (max - min) + min;
+	const randomColor = () => `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 0.5)`;
+
+	// const sdfdsfsd = () => {
+	// 	if (addRegionCallback) {
+	// 		addRegionCallback({
+	// 			start: 10,
+	// 			end: 40,
+	// 			content: 'Start1',
+	// 			color: randomColor(),
+	// 		});
+	// 	}
+	// };
+
 	return (
 		<section className='flex'>
 			<div className='w-[5%]'>
+				{/* <button onClick={() => sdfdsfsd()}>Clicl me </button> */}
 				<div className='flex flex-col gap-4 items-center  '>
 					<Button size='sm' variant='ghost' onClick={() => playAudio(!playingSegment)}>
 						{playingSegment ? (
@@ -59,10 +78,20 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 						)}
 					</Button>
 					<div className='w-full rotate-90 '>
-						<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} height={50} />
+						<AudioWaveform
+							audioUrl={`${sound}`}
+							playing={playingSegment}
+							width={700}
+							height={50}
+							// onReady={(callback: any) => {
+							// 	console.log('callbackcallbackcallback', callback);
+							// 	addRegionCallback = callback; // Store the callback
+							// }}
+						/>
 					</div>
 				</div>
 			</div>
+
 			<div className='w-[95%]'>
 				<Card className='mb-6'>
 					<CardHeader className='p-6'>
