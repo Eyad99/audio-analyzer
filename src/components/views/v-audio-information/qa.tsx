@@ -60,9 +60,9 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 
 	return (
 		<section className='flex'>
-			<div className='w-[5%]'>
+			<div className='w-[10%]'>
 				<div className='flex flex-col gap-4 items-center  '>
-					<Button size='sm' variant='ghost' onClick={() => playAudio(!playingSegment)}>
+					<Button size='sm' variant='ghost' onClick={() => playAudio(!playingSegment)} className='mb-2'>
 						{playingSegment ? (
 							<Pause className='text-[#383351]' size={28} strokeWidth={2} />
 						) : (
@@ -70,12 +70,12 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 						)}
 					</Button>
 					<div className='w-full rotate-90 '>
-						<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} height={50} hoveredLabel={hoveredLabel} />
+						<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} height={100} hoveredLabel={hoveredLabel} />
 					</div>
 				</div>
 			</div>
 
-			<div className='w-[95%]'>
+			<div className='w-[90%]'>
 				<Card className='mb-6'>
 					<CardHeader className='p-6'>
 						<CardTitle className='text-2xl font-bold'>QA Call Card Analysis</CardTitle>

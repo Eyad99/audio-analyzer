@@ -513,7 +513,7 @@ const MainPage = () => {
 	const initialValues = {
 		file: null,
 		fileBlob: '',
-		lang: 'en',
+		lang: 'English',
 		data: null,
 		loading: false,
 	};
@@ -560,8 +560,8 @@ const MainPage = () => {
 			{!values.data && (
 				<form onSubmit={handleSubmitFormik} className='min-h-[83vh]'>
 					<section className='flex flex-col items-center justify-center gap-4 min-h-[83vh]  w-full sm:w-1/2 m-auto'>
-						<h1 className='text-4xl font-bold'>Audio Analysis Results</h1>
-						<h1 className='text-sm sm:text-lg'>Upload an audio file of type (wav) to view the analysis results here.</h1>
+						<h1 className='text-4xl font-bold text-center'>Audio Analysis Results</h1>
+						<h1 className='text-sm sm:text-lg text-center'>Upload an audio file of type (.wav) to view the analysis results here.</h1>
 
 						<Uploader
 							onChange={(files: any) => {
@@ -579,8 +579,8 @@ const MainPage = () => {
 								value={values.lang}
 								label={'languages'}
 								elements={[
-									{ id: 'English', name: 'en' },
-									{ id: 'Arabic', name: 'ar' },
+									{ id: 'English', name: 'English' },
+									{ id: 'Arabic', name: 'Arabic' },
 								]}
 								onChange={(itam: any) => setFieldValue('lang', itam)}
 								errors={errors.lang as any}

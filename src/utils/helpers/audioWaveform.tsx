@@ -55,7 +55,7 @@
 // 		wavesurferRef.current.on('ready', () => {
 // 			if (onReady) {
 // 				onReady((region) => {
- // 					wsRegions.addRegion(region);
+// 					wsRegions.addRegion(region);
 // 				});
 // 			} // Create some regions at specific time ranges
 // 			// wsRegions.addRegion({
@@ -248,6 +248,38 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, hovere
 					resize: false,
 					drag: false,
 				});
+
+				wsRegions.addRegion({
+					start: 1,
+					end: 2,
+					color: 'red',
+					resize: false,
+					drag: false,
+				});
+
+				wsRegions.addRegion({
+					start: 5,
+					end: 6,
+					color: 'red',
+					resize: false,
+					drag: false,
+				});
+
+				wsRegions.addRegion({
+					start: 99,
+					end: 100,
+					color: 'yellow',
+					resize: false,
+					drag: false,
+				});
+
+				wsRegions.addRegion({
+					start: 115,
+					end: 116,
+					color: 'yellow',
+					resize: false,
+					drag: false,
+				});
 			}
 		},
 		[isReady]
@@ -272,6 +304,37 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, hovere
 			wavesurferRef.current.on('ready', () => {
 				setIsReady(true);
 				addRegion(hoveredLabel); // Add the region once ready
+				wsRegions.addRegion({
+					start: 1,
+					end: 2,
+					color: 'red',
+					resize: false,
+					drag: false,
+				});
+
+				wsRegions.addRegion({
+					start: 5,
+					end: 6,
+					color: 'red',
+					resize: false,
+					drag: false,
+				});
+
+				wsRegions.addRegion({
+					start: 99,
+					end: 100,
+					color: 'yellow',
+					resize: false,
+					drag: false,
+				});
+
+				wsRegions.addRegion({
+					start: 115,
+					end: 116,
+					color: 'yellow',
+					resize: false,
+					drag: false,
+				});
 			});
 
 			wavesurferRef.current.on('error', (error) => {

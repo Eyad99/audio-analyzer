@@ -20,7 +20,7 @@ const DefaultFileUploaderTheme = ({
 					<img src={uploadFileIcon} width='42px' height='42px' alt='uploadFileIcon' />
 					<div className={'flex gap-1'}>
 						<span className={'text-blue-300 text-lg font-bold'}>{`Browse files`}</span>
-						<span className={'text-black text-lg'}>{`or Drag your wav file to start the analysis`}</span>
+						<span className={'text-black text-lg'}>{`or Drag your (.wav) file to start the analysis`}</span>
 					</div>
 				</div>
 			</div>
