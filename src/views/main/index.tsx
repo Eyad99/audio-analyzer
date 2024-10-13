@@ -24,7 +24,7 @@ const MainPage = () => {
 			},
 		],
 		transcribed_text:
-			"hi thank you for going my nameis joge how may i help you i joss money with charo the i placed an order on february flackage it was bost bishipe and two packages a yesterday i refeved one package but on frotmiffing another package i charles thank you for calling and inquiring about your order it will be my pleasure to help you with that would you mind providing me your order number nonot at all thinke me a momen my pleasure i will be right here at to think you i gosted my order number of e de at ink you very much charles please give me a moment while i look that up what ci thak you y pleasure i charles thank you very much for waiting i was able to find information for that ordere number which you please confirm the name and shippin nat reson the order by yef i can do that a fo the name on the order charles peyworth and the shipping addrav at ohigro four four of indura fruit thank you very much i see you  balready receive one set of s e lero seven alarms and youare still missing the art see zear one pro remark controller is that correct ah yes atkrat am i wasn't able o any information on the second package that of wondering is it on back order o something thank you very much according to your ordership and information all the rest of your order eson back order it looks like it will be shiped within three business days with that you should be able to receive the rest of the order within one week or less ah der the ah think very much for your heal if completely my pleasure charles is there anything else i can help you we to day but i'm not at all think you thank you very much for calling and we hope that you enjoy the rest of your day eceeci ",
+			"hi thank you for going my nameis joge how may i help you i joss money with charo the i placed an order on february flackage it was bost bishipe and two packages a yesterday i refeved one package but on frotmiffing another package i charles thank you for calling and inquiring about your order it will be my pleasure to help you with that would you mind providing me your order number nonot at all thinke me a momen my pleasure i will be right here at to think you i gosted my order number of e de at ink you very much charles please give me a moment while i look that up what ci thak you y pleasure i charles thank you very much for waiting i was able to find information for that ordere number which you please confirm the name and shippin nat reason the order by yef i can do that a fo the name on the order charles peyworth and the shipping addrav at ohigro four four of indura fruit thank you very much i see you  balready receive one set of s e lero seven alarms and youare still missing the art see zear one pro remark controller is that correct ah yes atkrat am i wasn't able o any information on the second package that of wondering is it on back order o something thank you very much according to your ordership and information all the rest of your order eson back order it looks like it will be shiped within three business days with that you should be able to receive the rest of the order within one week or less ah der the ah think very much for your heal if completely my pleasure charles is there anything else i can help you we to day but i'm not at all think you thank you very much for calling and we hope that you enjoy the rest of your day eceeci ",
 
 		data: [
 			{
@@ -139,7 +139,7 @@ const MainPage = () => {
 				speaker: 'Agent',
 				start: 44.1639670114255,
 				end: 53.797905087105235,
-				text: 'i charles thank you very much for waiting i was able to find information for that ordere number which you please confirm the name and shippin nat reson the order',
+				text: 'i charles thank you very much for waiting i was able to find information for that ordere number which you please confirm the name and shippin nat reason the order',
 				sentiment: 0.38,
 				tone: 'Friendly',
 				segment_audio_path: 'audio/20241005-222420_3259/Agent_37.05_45.14.wav',
@@ -276,12 +276,13 @@ const MainPage = () => {
 					'Friendly, energetic voice tone': {
 						match: false,
 						score: 2,
-						reason: 'Needs improvement to meet the expected level.',
+						reason:
+							'The agent identified the need to use this compentency and attempted to use it but did not follow guidelines or was ineffective.',
 					},
 					'Understandable, conversational pace': {
 						match: false,
 						score: 5,
-						reason: 'Exceeded expectations.',
+						reason: 'The agent used the comperency and the customer reacted positively to it',
 					},
 					'Friendly / energetic voice tone - smiling voice': {
 						match: false,
@@ -371,47 +372,48 @@ const MainPage = () => {
 					'Demonstrate empathy (phrasing, voice characteristics, actions)': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 					'Apologies for inconvenience': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 					'Follow PACR': {
 						match: false,
-						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						score: 2,
+						reason:
+							'The agent identified the need to use this compentency and attempted to use it but did not follow guidelines or was ineffective.',
 					},
 					'Allows customer to vent, does not interrupt': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 					'Maintains a positive attitude & control throughout': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 					'Able to deliver negative decisions / results': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 					'Avoid being argumentative': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 					'Focus more on solutions than on problem': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 					'Follow the steps of saying ENOUGH when as appropriate': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 				},
 			},
@@ -428,7 +430,8 @@ const MainPage = () => {
 					},
 					'Correct questioning technique (open. closed)': {
 						match: true,
-						score: 3,
+						score: 5,
+						reason: 'The agent usedmeet the standard requirements.',
 					},
 					'Use processes questions': {
 						match: true,
@@ -440,7 +443,8 @@ const MainPage = () => {
 					},
 					'Confirm customer agreement': {
 						match: true,
-						score: 3,
+						score: 5,
+						reason: 'The agent usedmeet the standard requirements.',
 					},
 				},
 			},
@@ -450,14 +454,14 @@ const MainPage = () => {
 					'Complete and accurate information was provided as per the process': {
 						match: false,
 						score: 1,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
 					},
 				},
 				'Technical Ticket/ Complaint Handling ': {
 					'Registered the technical ticket/complaint accurately and didn’t miss out any important field': {
 						match: false,
 						score: 5,
-						reason: 'Did not meet the standard requirements.',
+						reason: 'The agent usedmeet the standard requirements.',
 					},
 				},
 				'Systems Usage': {
@@ -467,11 +471,15 @@ const MainPage = () => {
 					},
 					'Updating correct and complete customer’s information and ticket details on': {
 						match: false,
-						score: 3,
+						score: 2,
+						reason:
+							'The agent identified the need to use this compentency and attempted to use it but did not follow guidelines or was ineffective.',
 					},
 					'Updating correct ticket dispositions & notes on CRM': {
 						match: false,
-						score: 3,
+						score: 2,
+						reason:
+							'The agent identified the need to use this compentency and attempted to use it but did not follow guidelines or was ineffective.',
 					},
 					'Updating callback request or assigning action on CRM to the right person': {
 						match: false,
@@ -485,35 +493,35 @@ const MainPage = () => {
 					'Confirm action, expectations, results and time': {
 						match: true,
 						score: 5,
-						reason: 'Exceeded expectations.',
+						reason: 'The agent used the comperency and the customer reacted positively to it',
 					},
 				},
 				'Further asstiance': {
 					'Offer further asstiance': {
 						match: true,
 						score: 5,
-						reason: 'Exceeded expectations.',
+						reason: 'The agent used the comperency and the customer reacted positively to it',
 					},
 				},
 				'Staff name': {
 					'Reinforce agent name': {
 						match: true,
 						score: 5,
-						reason: 'Exceeded expectations.',
+						reason: 'The agent used the comperency and the customer reacted positively to it',
 					},
 				},
 				'Tone of voice': {
 					'Friendly and energetic & Intelligible close': {
 						match: true,
 						score: 5,
-						reason: 'Exceeded expectations.',
+						reason: 'The agent used the comperency and the customer reacted positively to it',
 					},
 				},
 				Closure: {
 					'Use the standard contact closing script': {
 						match: true,
 						score: 5,
-						reason: 'Exceeded expectations.',
+						reason: 'The agent used the comperency and the customer reacted positively to it',
 					},
 				},
 			},

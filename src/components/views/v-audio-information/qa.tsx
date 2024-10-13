@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ChevronDown, ChevronUp, Pause, Play, Pencil } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -88,7 +87,7 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 				</Card>
 				{Object.entries(criteriaAnalysis).map(([key, value]) => (
 					<div key={key} onMouseEnter={() => handleMouseEnter(key)} onMouseLeave={() => handleMouseLeave()}>
-						<CriteriaGroup name={key} data={value} setFieldValue={setFieldValue} />
+						<CriteriaGroup parentName={key} name={key} data={value} setFieldValue={setFieldValue} />
 					</div>
 				))}
 			</div>
@@ -96,8 +95,19 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 	);
 };
 
-function CriteriaGroup({ name, data, setFieldValue }: { name: string; data: CriteriaGroupProps; setFieldValue: any }) {
+function CriteriaGroup({
+	parentName,
+	name,
+	data,
+	setFieldValue,
+}: {
+	parentName: string;
+	name: string;
+	data: CriteriaGroupProps;
+	setFieldValue: any;
+}) {
 	const [isOpen, setIsOpen] = useState(false);
+	const [isOpenReason, setIsOpenReason] = useState<string | null>(null);
 	const [editScore, setEditScore] = useState('');
 	const matchData = calculateMatchPercentage(data);
 
@@ -106,9 +116,11 @@ function CriteriaGroup({ name, data, setFieldValue }: { name: string; data: Crit
 	const handleSelectScoreToEditIt = (row: string) => {
 		setEditScore(row);
 	};
-	const handeEditOnScore = (name: string, key: string, newScore: string) => {
-		setFieldValue(`data.criteria_analysis.${name}.${key}.score`, newScore);
+	const handeEditOnScore = (parentName: string, name: string, key: string, newScore: string) => {
+		console.log('name1name1name1', parentName, name);
+		setFieldValue(`data.criteria_analysis.${parentName}.${name}.${key}.score`, newScore);
 	};
+
 	return (
 		<Card className='mb-4'>
 			<CardHeader className='p-4'>
@@ -125,64 +137,73 @@ function CriteriaGroup({ name, data, setFieldValue }: { name: string; data: Crit
 				<CardContent className='p-4'>
 					{Object.entries(data).map(([key, value]) =>
 						'match' in value ? (
-							<div key={key} className='flex justify-between items-center py-2 border-b last:border-b-0'>
-								<span className='text-sm'>{key}</span>
-								<div className='flex items-center  gap-4'>
-									{/* Reason */}
-									{[1, 2, 5].includes(value?.score) && (
-										<DropdownMenu>
-											<DropdownMenuTrigger>
+							<div key={key} className='py-2 border-b last:border-b-0'>
+								<div className='flex justify-between items-center'>
+									<span className='text-sm'>{key}</span>
+									<div className='flex items-center'>
+										{/* Reason Button */}
+										{[1, 2, 5].includes(value?.score) && (
+											<Button variant='ghost' size='sm' onClick={() => setIsOpenReason(isOpenReason == key ? null : key)}>
 												<div className='flex items-center justify-center text-gray-600'>
 													<span>Reason</span>
-													<ChevronDown size={20} className='relative top-[2px]' />
+													{isOpenReason == null || isOpenReason !== key ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
 												</div>
-											</DropdownMenuTrigger>
-											<DropdownMenuContent>
-												<DropdownMenuItem>
-													<span>{value?.reason}</span>
-												</DropdownMenuItem>
-											</DropdownMenuContent>
-										</DropdownMenu>
-									)}
-									{/* Edit Score */}
-									<TooltipProvider>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Pencil className='text-[#383351]' size={20} onClick={() => handleSelectScoreToEditIt(key)} />
-											</TooltipTrigger>
-											<TooltipContent>
-												<span>Edit on score</span>
-											</TooltipContent>
-										</Tooltip>
-									</TooltipProvider>
-									{/* Score */}
-									{editScore == key ? (
-										<TextField
-											name={'reason'}
-											onBlur={() => handleSelectScoreToEditIt('')}
-											onChange={(event) => handeEditOnScore(name, key, event.target.value)}
-											type={'number'}
-											min={1}
-											max={5}
-											onKeyDown={(event) => event.key == 'Enter' && handleSelectScoreToEditIt('')}
-										/>
-									) : (
-										<span
-											className={
-												[1, 2].includes(+value?.score)
-													? 'text-red-500'
-													: [3, 4]?.includes(+value?.score)
-													? 'text-blue-500'
-													: 'text-green-500'
-											}
-										>
-											{value?.score}
-										</span>
-									)}
+											</Button>
+										)}
+										<div className='flex items-center gap-4'>
+											{/* Edit Score */}
+											<TooltipProvider>
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Pencil className='text-[#383351]' size={20} onClick={() => handleSelectScoreToEditIt(key)} />
+													</TooltipTrigger>
+													<TooltipContent>
+														<span>Edit on score</span>
+													</TooltipContent>
+												</Tooltip>
+											</TooltipProvider>
+
+											{/*  Score */}
+											{editScore === key ? (
+												<TextField
+													name={'reason'}
+													onBlur={() => handleSelectScoreToEditIt('')}
+													onChange={(event) => handeEditOnScore(parentName, name, key, event.target.value)}
+													type={'number'}
+													min={1}
+													max={5}
+													onKeyDown={(event) => event.key === 'Enter' && handleSelectScoreToEditIt('')}
+												/>
+											) : (
+												<span
+													className={
+														[1, 2].includes(+value?.score)
+															? 'text-red-500'
+															: [3, 4]?.includes(+value?.score)
+															? 'text-blue-500'
+															: 'text-green-500'
+													}
+												>
+													{value?.score}
+												</span>
+											)}
+										</div>
+									</div>
 								</div>
+
+								{/* Reason Accordion */}
+								{[1, 2, 5].includes(value?.score) && (isOpenReason == null || isOpenReason !== key) && (
+									<span className='text-gray-600'>{value?.reason}</span>
+								)}
 							</div>
 						) : (
-							<CriteriaGroup key={key} name={key} data={value as CriteriaGroupProps} setFieldValue={setFieldValue} />
+							<CriteriaGroup
+								key={key}
+								parentName={parentName}
+								name={key}
+								data={value as CriteriaGroupProps}
+								setFieldValue={setFieldValue}
+							/>
 						)
 					)}
 				</CardContent>
