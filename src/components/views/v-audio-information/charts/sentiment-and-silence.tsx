@@ -64,14 +64,14 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 
 	// Check for matching criteria in Greeting and Closing and push if true
 	if (allData.criteria_analysis['Greeting']) {
-		const greetingCriteria = allData.criteria_analysis['Greeting'];
+		const greetingCriteria = allData.criteria_analysis['Greeting']['Introduction'];
 
 		// Push 'Greeting' segment only if any relevant criteria match is true
 		if (
-			greetingCriteria['Immediate attention to customer'].match ||
-			greetingCriteria['Identify self and the organization'].match ||
-			greetingCriteria['Clear and timely greeting'].match ||
+			greetingCriteria['Identify yourself & organization utilizing the standard answer'].match ||
 			greetingCriteria['Ready and willing to help'].match ||
+			greetingCriteria['Friendly, energetic voice tone'].match ||
+			greetingCriteria['Understandable, conversational pace'].match ||
 			greetingCriteria['Friendly / energetic voice tone - smiling voice'].match
 		) {
 			greetingAndClosingSegments.push({
@@ -88,14 +88,16 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 		}
 	}
 
-	if (allData.criteria_analysis['Closing']) {
-		const closingCriteria = allData.criteria_analysis['Closing'];
+	if (allData.criteria_analysis['Farewell']) {
+		const closingCriteria = allData.criteria_analysis['Farewell'];
 
 		// Push 'Closing' segment only if any relevant criteria match is true
 		if (
-			closingCriteria['Ask for another assistance'].match ||
-			closingCriteria['Standard close'].match ||
-			closingCriteria['Friendly close'].match
+			closingCriteria['Call summary']['Confirm action, expectations, results and time'].match ||
+			closingCriteria['Further asstiance']['Offer further asstiance'].match ||
+			closingCriteria['Staff name']['Reinforce agent name'].match ||
+			closingCriteria['Tone of voice']['Friendly and energetic & Intelligible close'].match ||
+			closingCriteria['Closure']['Use the standard contact closing script'].match
 		) {
 			greetingAndClosingSegments.push({
 				label: 'Closing',

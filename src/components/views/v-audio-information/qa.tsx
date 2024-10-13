@@ -1,14 +1,13 @@
 import { FC, useState } from 'react';
-import { ChevronDown, ChevronUp, Check, X, Pause, Play, Pencil } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { ChevronDown, ChevronUp, Pause, Play, Pencil } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnalysisData, CriteriaGroupProps } from '@/core';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import AudioWaveform from '@/utils/helpers/audioWaveform';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import TextField from '@/components/reusable/fields/TextField';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.esm.js';
 
 interface QaProps {
 	criteriaAnalysis: AnalysisData;
@@ -57,7 +56,6 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 	const handleMouseLeave = () => {
 		setHoveredLabel(undefined);
 	};
-
 	return (
 		<section className='flex'>
 			<div className='w-[10%]'>
@@ -89,7 +87,7 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 					</CardHeader>
 				</Card>
 				{Object.entries(criteriaAnalysis).map(([key, value]) => (
-					<div key={key} onMouseEnter={() => handleMouseEnter(key)} onMouseLeave={handleMouseLeave}>
+					<div key={key} onMouseEnter={() => handleMouseEnter(key)} onMouseLeave={() => handleMouseLeave()}>
 						<CriteriaGroup name={key} data={value} setFieldValue={setFieldValue} />
 					</div>
 				))}

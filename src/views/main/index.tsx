@@ -264,247 +264,257 @@ const MainPage = () => {
 		],
 		criteria_analysis: {
 			Greeting: {
-				'Immediate attention to customer': {
-					match: true,
-					score: 4,
-				},
-				'Identify self and the organization': {
-					match: false,
-					score: 3,
-				},
-				'Clear and timely greeting': {
-					match: false,
-					score: 2,
-					reason: 'Needs improvement to meet the expected level.',
-				},
-				'Ready and willing to help': {
-					match: false,
-					score: 5,
-					reason: 'Exceeded expectations.',
-				},
-				'Friendly / energetic voice tone - smiling voice': {
-					match: false,
-					score: 4,
-				},
-			},
-			Understanding: {
-				'Follow hold protocol': {
-					match: false,
-					score: 1,
-					reason: 'Did not meet the standard requirements.',
-				},
-				'Follow call redirect protocol': {
-					match: false,
-					score: 2,
-					reason: 'Needs improvement to meet the expected level.',
-				},
-				'Portrays positive customer service attitude': {
-					match: false,
-					score: 2,
-					reason: 'Needs improvement to meet the expected level.',
-				},
-				'Confirm and use customers name': {
-					match: false,
-					score: 1,
-					reason: 'Did not meet the standard requirements.',
-				},
-				'Use protocol of asking security question': {
-					match: false,
-					score: 3,
-				},
-			},
-			Helping: {
-				Listening: {
-					'Customer does not have to repeat unnecessarily': {
-						match: false,
-						score: 1,
-						reason: 'Did not meet the standard requirements.',
-					},
-					'Agent does not interrupt (except for talkative customer)': {
-						match: false,
-						score: 2,
-						reason: 'Needs improvement to meet the expected level.',
-					},
-					'Demonstrates empathy / compassion': {
-						match: false,
-						score: 3,
-					},
-					'Confirms understanding (repeat and reinstate)': {
-						match: false,
-						score: 5,
-						reason: 'Exceeded expectations.',
-					},
-				},
-				Speaking: {
-					'Professional tone': {
-						match: false,
-						score: 1,
-						reason: 'Did not meet the standard requirements.',
-					},
-					'Use of appropriate language / word choice': {
-						match: false,
-						score: 2,
-						reason: 'Needs improvement to meet the expected level.',
-					},
-					'Pleasant voice': {
-						match: false,
-						score: 2,
-						reason: 'Needs improvement to meet the expected level.',
-					},
-					'Avoid abbreviation / jargons': {
-						match: false,
-						score: 5,
-						reason: 'Exceeded expectations.',
-					},
-				},
-				'Call Control': {
-					'Efficient use of time': {
+				Introduction: {
+					'Identify yourself & organization utilizing the standard answer': {
 						match: true,
-						score: 1,
-						reason: 'Did not meet the standard requirements.',
-					},
-					'Agent takes control of the call': {
-						match: false,
-						score: 5,
-						reason: 'Exceeded expectations.',
-					},
-					'Displays confidence': {
-						match: false,
 						score: 4,
 					},
-					"Identifies and verifies the customer's need": {
+					'Ready and willing to help': {
 						match: false,
 						score: 3,
 					},
-					'Escalates calls appropriately': {
-						match: false,
-						score: 5,
-						reason: 'Exceeded expectations.',
-					},
-				},
-				'Difficult call handling': {
-					'Do show empathy': {
-						match: false,
-						score: 1,
-						reason: 'Did not meet the standard requirements.',
-					},
-					'Do apologize for the inconvenience': {
+					'Friendly, energetic voice tone': {
 						match: false,
 						score: 2,
 						reason: 'Needs improvement to meet the expected level.',
 					},
-					'Diffuses anger': {
-						match: false,
-						score: 3,
-					},
-					'Maintain positive attitude throughout the call': {
-						match: false,
-						score: 3,
-					},
-					'Allow customer to vent anger': {
-						match: false,
-						score: 4,
-					},
-					'Avoid being argumentative': {
+					'Understandable, conversational pace': {
 						match: false,
 						score: 5,
 						reason: 'Exceeded expectations.',
+					},
+					'Friendly / energetic voice tone - smiling voice': {
+						match: false,
+						score: 4,
+					},
+				},
+			},
+
+			Understanding: {
+				Listening: {
+					'Fill silence': {
+						match: true,
+						score: 3,
+					},
+					'Frequent acknowledgment': {
+						match: true,
+						score: 3,
+					},
+					'Use paraphrasing to confirm understanding': {
+						match: true,
+						score: 3,
+					},
+					'Don’t interrupt': {
+						match: true,
+						score: 3,
+					},
+					'Show attention': {
+						match: true,
+						score: 3,
+					},
+					'Identify problem': {
+						match: true,
+						score: 3,
+					},
+					'Repeat numbers and confirm letters phonetically': {
+						match: true,
+						score: 3,
+					},
+				},
+				'Telephone etiquette': {
+					'Follow hold protocol': {
+						match: false,
+						score: 3,
+					},
+					'Follow call redirect protocol': {
+						match: false,
+						score: 3,
+					},
+					'Portrays positive CS attitude (polite, friendly, energetic)': {
+						match: false,
+						score: 3,
+					},
+					'Show Empathy': {
+						match: false,
+						score: 3,
+					},
+					'Use customer name': {
+						match: false,
+						score: 3,
+					},
+					'Avoid unexplained/confusing abbreviations/jargons': {
+						match: false,
+						score: 3,
+					},
+					'Project appropriate vocal emotion (tone)': {
+						match: false,
+						score: 3,
+					},
+					'Project appropriate vocal emotion (volume)': {
+						match: false,
+						score: 3,
+					},
+					'Project appropriate vocal emotion (pace)': {
+						match: false,
+						score: 3,
+					},
+					'Project appropriate vocal emotion (inflection)': {
+						match: false,
+						score: 3,
+					},
+					'Project appropriate vocal emotion (pronunciation / diction)': {
+						match: false,
+						score: 3,
+					},
+				},
+				'Difficult Call': {
+					'Demonstrate empathy (phrasing, voice characteristics, actions)': {
+						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
+					},
+					'Apologies for inconvenience': {
+						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
+					},
+					'Follow PACR': {
+						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
+					},
+					'Allows customer to vent, does not interrupt': {
+						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
+					},
+					'Maintains a positive attitude & control throughout': {
+						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
 					},
 					'Able to deliver negative decisions / results': {
 						match: false,
-						score: 5,
-						reason: 'Exceeded expectations.',
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
+					},
+					'Avoid being argumentative': {
+						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
+					},
+					'Focus more on solutions than on problem': {
+						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
+					},
+					'Follow the steps of saying ENOUGH when as appropriate': {
+						match: false,
+						score: 1,
+						reason: 'Did not meet the standard requirements.',
 					},
 				},
+			},
+
+			Helping: {
 				'Assessment and problem solving': {
-					'Provides one-stop shopping': {
+					'Ask/Confirm customer name': {
 						match: true,
-						score: 5,
-						reason: 'Exceeded expectations.',
+						score: 3,
 					},
-					'Appropriate complaint registry and follow up': {
+					'Ask verification questions': {
 						match: true,
-						score: 5,
-						reason: 'Exceeded expectations.',
+						score: 3,
 					},
-					'Asking effective questions and root cause analysis': {
+					'Correct questioning technique (open. closed)': {
 						match: true,
-						score: 5,
-						reason: 'Exceeded expectations.',
+						score: 3,
 					},
-					'Inform and educate the customer': {
+					'Use processes questions': {
 						match: true,
-						score: 15,
+						score: 3,
 					},
-					'Offer suggestions and alternatives': {
+					'Offer preferred solutions': {
 						match: true,
-						score: 15,
+						score: 3,
 					},
-					'Effectively negotiate a mutual beneficial outcome': {
+					'Confirm customer agreement': {
 						match: true,
-						score: 15,
-					},
-					'Clearly confirm the action, time frame and process': {
-						match: true,
-						score: 5,
-						reason: 'Exceeded expectations.',
+						score: 3,
 					},
 				},
 			},
-			'Setting Agreement': {
-				Product: {
-					'Provides consistent and accurate product features': {
+
+			'Reach Agreement': {
+				'Process knowledge': {
+					'Complete and accurate information was provided as per the process': {
 						match: false,
 						score: 1,
 						reason: 'Did not meet the standard requirements.',
 					},
-					Pricing: {
+				},
+				'Technical Ticket/ Complaint Handling ': {
+					'Registered the technical ticket/complaint accurately and didn’t miss out any important field': {
 						match: false,
-						score: 1,
+						score: 5,
 						reason: 'Did not meet the standard requirements.',
 					},
-					Documentation: {
-						match: false,
-						score: 4,
-					},
-					Eligibility: {
-						match: false,
-						score: 5,
-						reason: 'Exceeded expectations.',
-					},
 				},
-				Selling: {
-					"Identify customer's need": {
+				'Systems Usage': {
+					'Use of appropriate resources/systems to address the query and provide': {
 						match: false,
 						score: 3,
 					},
-					'Use consultative selling (right product to right customer)': {
+					'Updating correct and complete customer’s information and ticket details on': {
 						match: false,
 						score: 3,
 					},
-				},
-				'Process and procedures': {
-					'Good knowledge of policies / processes / procedures': {
+					'Updating correct ticket dispositions & notes on CRM': {
 						match: false,
-						score: 5,
-						reason: 'Exceeded expectations.',
+						score: 3,
+					},
+					'Updating callback request or assigning action on CRM to the right person': {
+						match: false,
+						score: 3,
 					},
 				},
 			},
+
 			Farewell: {
-				'Ask for another assistance': {
-					match: true,
-					score: 3,
+				'Call summary': {
+					'Confirm action, expectations, results and time': {
+						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
+					},
 				},
-				'Standard close': {
-					match: true,
-					score: 5,
-					reason: 'Exceeded expectations.',
+				'Further asstiance': {
+					'Offer further asstiance': {
+						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
+					},
 				},
-				'Friendly close': {
-					match: false,
-					score: 1,
-					reason: 'Did not meet the standard requirements.',
+				'Staff name': {
+					'Reinforce agent name': {
+						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
+					},
+				},
+				'Tone of voice': {
+					'Friendly and energetic & Intelligible close': {
+						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
+					},
+				},
+				Closure: {
+					'Use the standard contact closing script': {
+						match: true,
+						score: 5,
+						reason: 'Exceeded expectations.',
+					},
 				},
 			},
 		},
