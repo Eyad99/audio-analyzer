@@ -87,7 +87,14 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 				</Card>
 				{Object.entries(criteriaAnalysis).map(([key, value]) => (
 					<div key={key} onMouseEnter={() => handleMouseEnter(key)} onMouseLeave={() => handleMouseLeave()}>
-						<CriteriaGroup parentName={key} name={key} data={value} setFieldValue={setFieldValue} />
+						<CriteriaGroup
+							parentName={key}
+							name={key}
+							data={value}
+							setFieldValue={setFieldValue}
+							textColor='black'
+							bgProgress='bg-[#383351]'
+						/>
 					</div>
 				))}
 			</div>
@@ -100,11 +107,15 @@ function CriteriaGroup({
 	name,
 	data,
 	setFieldValue,
+	textColor,
+	bgProgress,
 }: {
 	parentName: string;
 	name: string;
 	data: CriteriaGroupProps;
 	setFieldValue: any;
+	textColor: string;
+	bgProgress: string;
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenReason, setIsOpenReason] = useState<string | null>(null);
@@ -117,7 +128,6 @@ function CriteriaGroup({
 		setEditScore(row);
 	};
 	const handeEditOnScore = (parentName: string, name: string, key: string, newScore: string) => {
-		console.log('name1name1name1', parentName, name);
 		setFieldValue(`data.criteria_analysis.${parentName}.${name}.${key}.score`, newScore);
 	};
 
@@ -125,12 +135,12 @@ function CriteriaGroup({
 		<Card className='mb-4'>
 			<CardHeader className='p-4'>
 				<CardTitle className='flex justify-between items-center'>
-					<span>{name}</span>
+					<span className={textColor}>{name}</span>
 					<Button variant='ghost' size='sm' onClick={() => setIsOpen(!isOpen)}>
 						{isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
 					</Button>
 				</CardTitle>
-				<Progress value={percentage} className='h-2' indicatorColor='bg-[#383351]' />
+				<Progress value={percentage} className='h-2' indicatorColor={bgProgress} />
 				<div className='text-sm text-muted-foreground mt-2'>{percentage}% Completed</div>
 			</CardHeader>
 			{isOpen && (
@@ -203,6 +213,8 @@ function CriteriaGroup({
 								name={key}
 								data={value as CriteriaGroupProps}
 								setFieldValue={setFieldValue}
+								textColor='text-gray-600'
+								bgProgress='bg-gray-600'
 							/>
 						)
 					)}

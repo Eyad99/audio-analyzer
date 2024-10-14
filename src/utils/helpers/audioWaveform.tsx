@@ -22,8 +22,8 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, hovere
 	const defaultRegions = [
 		{ start: 1, end: 2, color: 'red' },
 		{ start: 5, end: 6, color: 'red' },
-		{ start: 99, end: 100, color: 'yellow' },
-		{ start: 115, end: 116, color: 'yellow' },
+		{ start: 74, end: 75, color: 'yellow' },
+		{ start: 79, end: 80, color: 'yellow' },
 	];
 
 	const addRegion = useCallback(
@@ -45,11 +45,11 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, hovere
 			wsRegions.clearRegions();
 
 			const regionMapping = {
-				Greeting: { start: 0, end: 20 },
-				Understanding: { start: 20, end: 50 },
-				Helping: { start: 50, end: 80 },
-				'Reach Agreement': { start: 80, end: 105 },
-				Farewell: { start: 105, end: 116 },
+				Greeting: { start: 0, end: 15 },
+				Understanding: { start: 15, end: 30 },
+				Helping: { start: 30, end: 45 },
+				'Reach Agreement': { start: 45, end: 70 },
+				Farewell: { start: 70, end: 80 },
 			} as any;
 
 			const region = regionMapping[label];
