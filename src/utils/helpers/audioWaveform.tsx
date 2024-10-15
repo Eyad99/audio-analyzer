@@ -20,10 +20,9 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, hovere
 	const randomColor = () => `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 0.5)`;
 
 	const defaultRegions = [
-		{ start: 1, end: 2, color: 'red' },
-		{ start: 5, end: 6, color: 'red' },
-		{ start: 74, end: 75, color: 'yellow' },
-		{ start: 79, end: 80, color: 'yellow' },
+		{ start: 5, end: 6, color: `rgba(255,255,0, 0.5)` },
+		{ start: 34.5, end: 38, color: `rgba(0,255,0, 0.5)` },
+		{ start: 41, color: `rgba(255,0,0, 0.5)` },
 	];
 
 	const addRegion = useCallback(
@@ -48,7 +47,7 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, hovere
 				Greeting: { start: 0, end: 15 },
 				Understanding: { start: 15, end: 30 },
 				Helping: { start: 30, end: 45 },
-				'Reach Agreement': { start: 45, end: 70 },
+				'Getting Agreement': { start: 45, end: 70 },
 				Farewell: { start: 70, end: 80 },
 			} as any;
 

@@ -35,7 +35,6 @@ const VAudioInformation: FC<VAudioInformationProps> = ({ data, sound, setFieldVa
 						<Qa criteriaAnalysis={data.criteria_analysis} sound={sound} setFieldValue={setFieldValue} />
 					</TabsContent>
 					<TabsContent value='call_transcribed' className='flex flex-col gap-4'>
-						<Speakers segments={data?.data} />
 						<Transcription
 							transcribedText={data?.transcribed_text}
 							totalTimeSpoken={data?.total_time_spoken.toFixed(2)}
@@ -48,6 +47,7 @@ const VAudioInformation: FC<VAudioInformationProps> = ({ data, sound, setFieldVa
 							silenceSegments={data?.silence_segments.map((seg: any) => `${seg.start.toFixed(2)}s - ${seg.end.toFixed(2)}s`).join(', ')}
 							allData={data}
 						/>
+						<Speakers segments={data?.data} />
 					</TabsContent>
 				</div>
 			</Tabs>

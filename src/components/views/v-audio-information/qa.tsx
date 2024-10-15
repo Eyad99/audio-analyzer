@@ -56,47 +56,61 @@ const Qa: FC<QaProps> = ({ criteriaAnalysis, sound, setFieldValue }) => {
 		setHoveredLabel(undefined);
 	};
 	return (
-		<section className='flex'>
-			<div className='w-[10%]'>
-				<div className='flex flex-col gap-4 items-center  '>
-					<Button size='sm' variant='ghost' onClick={() => playAudio(!playingSegment)} className='mb-2'>
-						{playingSegment ? (
-							<Pause className='text-[#383351]' size={28} strokeWidth={2} />
-						) : (
-							<Play className='text-[#383351]' size={28} strokeWidth={2} />
-						)}
-					</Button>
-					<div className='w-full rotate-90 '>
-						<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} height={100} hoveredLabel={hoveredLabel} />
+		<section className='flex flex-col'>
+			<div className='flex'>
+				<div className='w-[12%]'>
+					<div className='flex items-center  gap-2'>
+						<div className='w-[2.5vh] h-[2.5vh] bg-yellow-400 rounded-[50%]'></div>
+						<span className='font-bold'>Silence</span>
 					</div>
+					<div className='flex items-center  gap-2'>
+						<div className='w-[2.5vh] h-[2.5vh] bg-green-400 rounded-[50%]'></div>
+						<span className='font-bold'>Hold</span>
+					</div>
+					<div className='flex items-center  gap-2'>
+						<div className='w-[2.5vh] h-[2.5vh] bg-red-400 rounded-[50%]'></div>
+						<span className='font-bold'>Interruption</span>
+					</div>
+				</div>
+				<div className='w-[88%]'>
+					<Card className='mb-6'>
+						<CardHeader className='p-6'>
+							<CardTitle className='text-2xl font-bold'>QA Call Card Analysis</CardTitle>
+							<div className='mt-4'>
+								<Progress value={overallPercentage} className='h-4' indicatorColor='bg-[#383351]' />
+								<div className='flex justify-between items-center mt-2'>
+									<span className='text-sm text-muted-foreground'>Overall Score</span>
+									<span className='text-2xl font-bold'>{overallPercentage}%</span>
+								</div>
+							</div>
+						</CardHeader>
+					</Card>
 				</div>
 			</div>
 
-			<div className='w-[90%]'>
-				<Card className='mb-6'>
-					<CardHeader className='p-6'>
-						<CardTitle className='text-2xl font-bold'>QA Call Card Analysis</CardTitle>
-						<div className='mt-4'>
-							<Progress value={overallPercentage} className='h-4' indicatorColor='bg-[#383351]' />
-							<div className='flex justify-between items-center mt-2'>
-								<span className='text-sm text-muted-foreground'>Overall Score</span>
-								<span className='text-2xl font-bold'>{overallPercentage}%</span>
-							</div>
+			<div className='flex'>
+				<div className='w-[12%]'>
+					<div className='flex flex-col gap-4 items-center  '>
+						<Button size='sm' variant='ghost' onClick={() => playAudio(!playingSegment)} className='mb-2'>
+							{playingSegment ? (
+								<Pause className='text-[#383351]' size={28} strokeWidth={2} />
+							) : (
+								<Play className='text-[#383351]' size={28} strokeWidth={2} />
+							)}
+						</Button>
+						<div className='w-full rotate-90 '>
+							<AudioWaveform audioUrl={`${sound}`} playing={playingSegment} width={700} height={100} hoveredLabel={hoveredLabel} />
 						</div>
-					</CardHeader>
-				</Card>
-				{Object.entries(criteriaAnalysis).map(([key, value]) => (
-					<div key={key} onMouseEnter={() => handleMouseEnter(key)} onMouseLeave={() => handleMouseLeave()}>
-						<CriteriaGroup
-							parentName={key}
-							name={key}
-							data={value}
-							setFieldValue={setFieldValue}
-							textColor='black'
-							bgProgress='bg-[#383351]'
-						/>
 					</div>
-				))}
+				</div>
+
+				<div className='w-[88%]'>
+					{Object.entries(criteriaAnalysis).map(([key, value]) => (
+						<div key={key} onMouseEnter={() => handleMouseEnter(key)} onMouseLeave={() => handleMouseLeave()}>
+							<CriteriaGroup parentName={key} name={key} data={value} setFieldValue={setFieldValue} cardColor='bg-white' />
+						</div>
+					))}
+				</div>
 			</div>
 		</section>
 	);
@@ -107,19 +121,20 @@ function CriteriaGroup({
 	name,
 	data,
 	setFieldValue,
-	textColor,
-	bgProgress,
+
+	cardColor,
 }: {
 	parentName: string;
 	name: string;
 	data: CriteriaGroupProps;
 	setFieldValue: any;
-	textColor: string;
-	bgProgress: string;
+
+	cardColor: string;
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenReason, setIsOpenReason] = useState<string | null>(null);
 	const [editScore, setEditScore] = useState('');
+	const [editReason, setEditReason] = useState('');
 	const matchData = calculateMatchPercentage(data);
 
 	const percentage = Math.round((matchData.matchCount / matchData.totalCount) * 100);
@@ -128,19 +143,35 @@ function CriteriaGroup({
 		setEditScore(row);
 	};
 	const handeEditOnScore = (parentName: string, name: string, key: string, newScore: string) => {
-		setFieldValue(`data.criteria_analysis.${parentName}.${name}.${key}.score`, newScore);
+		if (parentName === name) {
+			setFieldValue(`data.criteria_analysis.${name}.${key}.score`, newScore);
+			setFieldValue(`data.criteria_analysis.${name}.${key}.reason`, '');
+		} else {
+			setFieldValue(`data.criteria_analysis.${parentName}.${name}.${key}.score`, newScore);
+			setFieldValue(`data.criteria_analysis.${parentName}.${name}.${key}.reason`, '');
+		}
+	};
+
+	const handeEditReason = (parentName: string, name: string, key: string) => {
+		if (parentName === name) {
+			setFieldValue(`data.criteria_analysis.${name}.${key}.reason`, editReason);
+			setEditReason('');
+		} else {
+			setFieldValue(`data.criteria_analysis.${parentName}.${name}.${key}.reason`, editReason);
+			setEditReason('');
+		}
 	};
 
 	return (
-		<Card className='mb-4'>
+		<Card className={`mb-4 ${cardColor}`}>
 			<CardHeader className='p-4'>
 				<CardTitle className='flex justify-between items-center'>
-					<span className={textColor}>{name}</span>
+					<span>{name}</span>
 					<Button variant='ghost' size='sm' onClick={() => setIsOpen(!isOpen)}>
 						{isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
 					</Button>
 				</CardTitle>
-				<Progress value={percentage} className='h-2' indicatorColor={bgProgress} />
+				<Progress value={percentage} className='h-2' indicatorColor={'bg-[#383351]'} />
 				<div className='text-sm text-muted-foreground mt-2'>{percentage}% Completed</div>
 			</CardHeader>
 			{isOpen && (
@@ -162,16 +193,18 @@ function CriteriaGroup({
 										)}
 										<div className='flex items-center gap-4'>
 											{/* Edit Score */}
-											<TooltipProvider>
-												<Tooltip>
-													<TooltipTrigger asChild>
-														<Pencil className='text-[#383351]' size={20} onClick={() => handleSelectScoreToEditIt(key)} />
-													</TooltipTrigger>
-													<TooltipContent>
-														<span>Edit on score</span>
-													</TooltipContent>
-												</Tooltip>
-											</TooltipProvider>
+											{value.score !== 'Y' && (
+												<TooltipProvider>
+													<Tooltip>
+														<TooltipTrigger asChild>
+															<Pencil className='text-[#383351]' size={20} onClick={() => handleSelectScoreToEditIt(key)} />
+														</TooltipTrigger>
+														<TooltipContent>
+															<span>Edit on score</span>
+														</TooltipContent>
+													</Tooltip>
+												</TooltipProvider>
+											)}
 
 											{/*  Score */}
 											{editScore === key ? (
@@ -202,9 +235,21 @@ function CriteriaGroup({
 								</div>
 
 								{/* Reason Accordion */}
-								{[1, 2, 5].includes(value?.score) && (isOpenReason == null || isOpenReason !== key) && (
-									<span className='text-gray-600'>{value?.reason}</span>
-								)}
+								{[1, 2, 5].includes(+value?.score) &&
+									(isOpenReason == null || isOpenReason !== key) &&
+									(value?.reason === '' ? (
+										<TextField
+											placeholder='Enter The Reason'
+											name={'reason'}
+											onBlur={() => handeEditReason(parentName, name, key)}
+											onChange={(event) => setEditReason(event.target.value)}
+											min={1}
+											max={5}
+											onKeyDown={(event) => event.key === 'Enter' && handeEditReason(parentName, name, key)}
+										/>
+									) : (
+										<span className='text-gray-600'>{value?.reason}</span>
+									))}
 							</div>
 						) : (
 							<CriteriaGroup
@@ -213,8 +258,7 @@ function CriteriaGroup({
 								name={key}
 								data={value as CriteriaGroupProps}
 								setFieldValue={setFieldValue}
-								textColor='text-gray-600'
-								bgProgress='bg-gray-600'
+								cardColor='bg-gray-50'
 							/>
 						)
 					)}

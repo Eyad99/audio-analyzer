@@ -39,21 +39,67 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 	});
 
 	// ----------- Silence -----------
-	const silenceDatasets = allData.silence_segments
-		.filter((segment: any) => segment.end - segment.start > 1) // Filter out segments with duration < 1
-		.map((segment: any, index: number) => {
-			return {
-				label: `Silence Segment ${index + 1}`,
-				data: [
-					{ x: segment.start, y: 0 },
-					{ x: segment.end, y: 0 },
-				],
-				borderColor: 'rgba(255, 165, 0, 0.8)',
-				backgroundColor: 'rgba(255, 255, 0, 0.2)',
-				borderDash: [15, 15],
-				pointRadius: 15, // No need for conditional here since all durations > 1
-			};
-		});
+	// const silenceDatasets = allData.silence_segments
+	// 	.filter((segment: any) => segment.end - segment.start > 1) // Filter out segments with duration < 1
+	// 	.map((segment: any, index: number) => {
+	// 		return {
+	// 			label: `Silence Segment ${index + 1}`,
+	// 			data: [
+	// 				{ x: segment.start, y: 0 },
+	// 				{ x: segment.end, y: 0 },
+	// 			],
+	// 			borderColor: 'rgba(255, 165, 0, 0.8)',
+	// 			backgroundColor: 'rgba(255, 255, 0, 0.2)',
+	// 			borderDash: [15, 15],
+	// 			pointRadius: 15, // No need for conditional here since all durations > 1
+	// 		};
+	// 	});
+	const silenceDatasets = [
+		{
+			label: `Silence Segment ${1}`,
+			data: [{ x: 5.8, y: 0 }],
+			borderColor: 'rgba(255, 165, 0, 0.8)',
+			backgroundColor: 'rgba(255, 255, 0, 0.2)',
+			borderDash: [15, 15],
+			pointRadius: 15,
+		},
+	];
+
+	// const silenceDatasets = [
+	// 	{
+	// 	  label: `Silence Segment ${1}`,
+	// 	  data: [
+	// 		{ x: 5.8, y: 0 }, // Start point at x = 5.8
+	// 		{ x: 10, y: 0 },  // End point at x = 10
+	// 	  ],
+	// 	  borderColor: 'rgba(255, 165, 0, 0.8)',
+	// 	  backgroundColor: 'rgba(255, 255, 0, 0.2)',
+	// 	  borderDash: [15, 15], // Dashed line
+	// 	  fill: false, // Ensure it doesn't fill the area under the line
+	// 	  tension: 0, // Straight line between points
+	// 	},
+	//   ];
+	const holdDatasets = [
+		{
+			label: `Hold Segment ${1}`,
+			data: [{ x: 34.5, y: 0 }],
+			borderColor: 'rgba(0, 165, 255, 0.8)',
+			backgroundColor: 'rgba(0, 255, 255, 0.2)',
+			borderDash: [15, 15],
+			pointRadius: 15,
+		},
+	];
+
+	const interruptionDatasets = [
+		{
+			label: `Silence Segment ${1}`,
+			data: [{ x: 41.5, y: 0 }],
+			borderColor: 'rgba(165, 0, 0, 0.8)',
+			backgroundColor: 'rgba(255, 0, 0, 0.2)',
+			borderDash: [15, 15],
+			pointRadius: 15,
+		},
+	];
 
 	// ----------- Greeting And Closing Segments -----------
 	const greetingAndClosingSegments = [];
@@ -61,10 +107,9 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 	const startendTime = allData.data.length ? allData.data[0].end : 0;
 	const endstartTime = allData.data.length ? allData.data[allData.data.length - 1].start : 10;
 	const endTime = allData.data.length ? allData.data[allData.data.length - 1].end : 10;
-
 	// Check for matching criteria in Greeting and Closing and push if true
 	if (allData.criteria_analysis['Greeting']) {
-		const greetingCriteria = allData.criteria_analysis['Greeting']['Introduction'];
+		const greetingCriteria = allData.criteria_analysis['Greeting'];
 
 		// Push 'Greeting' segment only if any relevant criteria match is true
 		if (
@@ -115,7 +160,7 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 
 	const lineData = {
 		labels: [],
-		datasets: [...sentimentDatasets, ...silenceDatasets, ...greetingAndClosingSegments],
+		datasets: [...sentimentDatasets, ...silenceDatasets, ...holdDatasets, ...interruptionDatasets, ...greetingAndClosingSegments],
 	};
 
 	const options = {
@@ -160,7 +205,7 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 					</div>
 				}
 			/>
-			<div className='p-[20px] flex flex-col gap-4 col-span-1 md:col-span-1 sm:col-span-2 sm-max:col-span-2 rounded-[20px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:shadow-none  transform transition-transform duration-500 hover:translate-y-[-10px] hover:shadow-[0_0_40px_rgba(8,21,66,0.05)] '>
+			<div className='h-fit p-[20px] flex flex-col gap-4 col-span-1 md:col-span-1 sm:col-span-2 sm-max:col-span-2 rounded-[20px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:shadow-none  transform transition-transform duration-500 hover:translate-y-[-10px] hover:shadow-[0_0_40px_rgba(8,21,66,0.05)] '>
 				<div className='flex justify-between'>
 					<h2 className='text-lg font-bold text-[#4F4A85] dark:text-white'>Sentiment and Silence Segments Over Time</h2>
 					<div className='flex gap-2 items-center'>
