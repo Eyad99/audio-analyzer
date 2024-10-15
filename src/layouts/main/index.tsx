@@ -1,8 +1,9 @@
 import Footer from '@/components/widgets/footer';
 import Navbar from '@/components/widgets/navbar';
 import MainRoutes from '@/routes/main';
+import { NavigateByRole } from '@/utils';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 const MainLayout = () => {
 	const getRoutes = (routes: RoutesType[]): any => {
@@ -19,7 +20,10 @@ const MainLayout = () => {
 		<div className='h-full min-h-screen w-full'>
 			<main className={`mx-auto `}>
 				<Navbar />
-				<Routes>{getRoutes(MainRoutes)}</Routes>
+				<Routes>
+					{getRoutes(MainRoutes)}
+					<Route path='/' element={<Navigate to={NavigateByRole} replace />} />
+				</Routes>
 				<Footer />
 			</main>
 		</div>

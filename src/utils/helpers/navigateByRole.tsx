@@ -1,16 +1,6 @@
-import { KEY_USER_COOKIE } from '@/variables/constants';
+import { KEY_TOKEN_COOKIE } from '@/variables/constants';
 import Cookies from 'js-cookie';
 
-let user: any = Cookies.get(KEY_USER_COOKIE);
-user = user ? JSON.parse(user) : {};
+const isLoggedIn = Cookies.get(KEY_TOKEN_COOKIE);
 
-export const NavigateByRole =
-	user?.role === 'superadmin'
-		? '/admin/dashboard'
-		: user?.role === 'administrator'
-		? '/admin/dashboard'
-		: user?.role === 'customer'
-		? '/customer/dashboard'
-		: user?.role === 'staff'
-		? '/staff/dashboard'
-		: '/auth/sign-in';
+export const NavigateByRole = isLoggedIn ? '/dashboard' : '/auth/sign-in';

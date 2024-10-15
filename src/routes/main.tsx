@@ -3,15 +3,15 @@ import NotFound from '@/views/not-found';
 
 const MainRoutes = [
 	{
-		name: '',
+		name: 'Dashboard',
 		layout: '/',
-		path: '/',
+		path: '/dashboard',
 		component: <MainPage />,
 	},
 
 	{
 		name: 'NotFound',
-		layout: '/auth',
+		layout: '/',
 		path: '*',
 		invisible: true,
 		component: <NotFound />,
