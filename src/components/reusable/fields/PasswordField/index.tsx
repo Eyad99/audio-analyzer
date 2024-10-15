@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
 import TextField from '../TextField';
-import EyeToggleButton from './EyeToggleButton';
 
 type PasswordFieldProps = {
 	onBlur: {
@@ -50,11 +49,9 @@ const PasswordField: FC<PasswordFieldProps> = ({
 				type={passwordVisibility ? 'text' : 'password'}
 				error={!!touched && !!errors}
 				helperText={touched && errors}
+				show={passwordVisibility}
+				click={togglePasswordVisibility}
 			/>
-
-			<div className='absolute top-[40%] left-[88%]'>
-				<EyeToggleButton show={passwordVisibility} click={togglePasswordVisibility} />
-			</div>
 		</div>
 	);
 };

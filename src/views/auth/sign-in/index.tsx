@@ -51,7 +51,7 @@ function SignIn() {
 						<div className='md:mt-[10vh] mt-0 w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]'>
 							<img src={insightsImg} width={300} className='mb-10 m-auto md:hidden' />
 
-							<h3 className='mb-2.5 text-4xl font-bold text-navy-700 dark:text-white'>Sign In</h3>
+							<h3 className='mb-2.5 text-4xl font-bold text-primary dark:text-white'>Sign In</h3>
 							<p className='mb-9 ml-1 text-base text-gray-600'>Enter your email and password to sign in!</p>
 
 							<TextField
@@ -76,13 +76,7 @@ function SignIn() {
 								placeholder={`Password`}
 							/>
 
-							<div className='mb-4 flex items-center justify-end px-2'>
-								<Link className='text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white' to='/auth/forget-password'>
-									Forgot Password?
-								</Link>
-							</div>
-
-							<Button variant={'blue'} className='w-full mt-4'>
+							<Button className='w-full mt-4'>
 								<span>Sign in</span>
 							</Button>
 						</div>
