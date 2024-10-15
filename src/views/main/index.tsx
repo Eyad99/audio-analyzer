@@ -679,7 +679,7 @@ const MainPage = () => {
 				<form onSubmit={handleSubmitFormik} className='min-h-[83vh]'>
 					<section className='flex flex-col items-center justify-center gap-4 min-h-[83vh]  w-full sm:w-1/2 m-auto'>
 						<h1 className='text-4xl font-bold text-center'>Audio Analysis Results</h1>
-						<h1 className='text-sm sm:text-lg text-center'>Upload an audio file of type (.wav) to view the analysis results here.</h1>
+						<h1 className='text-sm sm:text-lg text-center'>Upload an audio file to view the analysis results here.</h1>
 
 						<Uploader
 							onChange={(files: any) => {

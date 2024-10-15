@@ -29,7 +29,7 @@ const TextField: React.FC<InputProps | TextFieldProps> = ({
 		<div className={divClassName}>
 			<div className='grid w-full items-center gap-1.5'>
 				{label && (
-					<Label htmlFor={label} className={`ml-1.5 text-sm font-bold capitalize text-navy-700 dark:text-white`}>
+					<Label htmlFor={label} className={`ml-1.5 text-sm font-bold capitalize text-primary dark:text-white`}>
 						{label}
 					</Label>
 				)}
