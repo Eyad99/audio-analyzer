@@ -54,14 +54,24 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 	// 			pointRadius: 15, // No need for conditional here since all durations > 1
 	// 		};
 	// 	});
+	// const silenceDatasets = [
+	// 	{
+	// 		label: `Silence Segment`,
+	// 		data: [{ x: 5.8, y: 0 }],
+	// 		borderColor: 'rgba(255, 165, 0, 0.8)',
+	// 		backgroundColor: 'rgba(255, 255, 0, 0.2)',
+	// 		borderDash: [15, 15],
+	// 		pointRadius: 15,
+	// 	},
+	// ];
+
 	const silenceDatasets = [
 		{
-			label: `Silence Segment ${1}`,
-			data: [{ x: 5.8, y: 0 }],
-			borderColor: 'rgba(255, 165, 0, 0.8)',
-			backgroundColor: 'rgba(255, 255, 0, 0.2)',
-			borderDash: [15, 15],
-			pointRadius: 15,
+			label: `Silence Segment`,
+			data: [{ x: 5.8, y: 0.7 }],
+			type: 'bar',
+			backgroundColor: 'rgba(255, 165, 0, 0.3)',
+			barThickness: 15, // Adjust the bar width
 		},
 	];
 
@@ -78,22 +88,31 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 
 	const holdDatasets = [
 		{
-			label: `Hold Segment ${1}`,
-			data: [{ x: 34.5, y: 0.5 }],
+			label: `Hold Segment`,
+			data: [{ x: 34.5, y: 0.7 }],
 			type: 'bar',
 			backgroundColor: 'rgba(128, 128, 128, 0.3)',
 			barThickness: 30, // Adjust the bar width
 		},
 	];
 
+	// const interruptionDatasets = [
+	// 	{
+	// 		label: `Silence Segment ${1}`,
+	// 		data: [{ x: 41.5, y: 0 }],
+	// 		borderColor: 'rgba(165, 0, 0, 0.8)',
+	// 		backgroundColor: 'rgba(255, 0, 0, 0.2)',
+	// 		borderDash: [15, 15],
+	// 		pointRadius: 15,
+	// 	},
+	// ];
 	const interruptionDatasets = [
 		{
-			label: `Silence Segment ${1}`,
-			data: [{ x: 41.5, y: 0 }],
-			borderColor: 'rgba(165, 0, 0, 0.8)',
-			backgroundColor: 'rgba(255, 0, 0, 0.2)',
-			borderDash: [15, 15],
-			pointRadius: 15,
+			label: `Interruption Segment`,
+			data: [{ x: 41.5, y: 0.7 }],
+			type: 'bar',
+			backgroundColor: 'rgba(255, 192, 203, 0.3)',
+			barThickness: 30, // Adjust the bar width
 		},
 	];
 
