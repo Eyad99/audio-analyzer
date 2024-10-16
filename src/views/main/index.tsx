@@ -12,7 +12,7 @@ const MainPage = () => {
 	const reaData = {
 		code: 200,
 		message: 'success',
-		duration: 80.4,
+		duration: 72,
 		total_time_silence: 0.021750711345742246,
 		total_time_spoken: 80.32537699982103,
 		silence_segments: [
@@ -140,13 +140,12 @@ const MainPage = () => {
 				'Friendly, energetic voice tone': {
 					match: false,
 					score: 2,
-					reason:
-						'The agent identified the need to use this compentency and attempted to use it but did not follow guidelines or was ineffective.',
+					reason: "The agent's voice tone is a little bit monotonous",
 				},
 				'Understandable, conversational pace': {
 					match: false,
 					score: 5,
-					reason: 'The agent used the comperency and the customer reacted positively to it',
+					reason: 'The agent was speaking clearly with good pronunciation at a good pace',
 				},
 			},
 
@@ -241,8 +240,7 @@ const MainPage = () => {
 					'Follow PACR': {
 						match: false,
 						score: 2,
-						reason:
-							'The agent identified the need to use this compentency and attempted to use it but did not follow guidelines or was ineffective.',
+						reason: "The agent's voice tone is a little bit monotonous",
 					},
 					'Allows customer to vent, does not interrupt': {
 						match: false,
@@ -327,14 +325,12 @@ const MainPage = () => {
 					'Updating correct and complete customer’s information and ticket details on': {
 						match: false,
 						score: 2,
-						reason:
-							'The agent identified the need to use this compentency and attempted to use it but did not follow guidelines or was ineffective.',
+						reason: "The agent's voice tone is a little bit monotonous",
 					},
 					'Updating correct ticket dispositions & notes on CRM': {
 						match: false,
 						score: 2,
-						reason:
-							'The agent identified the need to use this compentency and attempted to use it but did not follow guidelines or was ineffective.',
+						reason: "The agent's voice tone is a little bit monotonous",
 					},
 					'Updating callback request or assigning action on CRM to the right person': {
 						match: false,
@@ -348,35 +344,35 @@ const MainPage = () => {
 					'Confirm action, expectations, results and time': {
 						match: true,
 						score: 5,
-						reason: 'The agent used the comperency and the customer reacted positively to it',
+						reason: 'The agent was speaking clearly with good pronunciation at a good pace',
 					},
 				},
 				'Further asstiance': {
 					'Offer further asstiance': {
 						match: true,
 						score: 5,
-						reason: 'The agent used the comperency and the customer reacted positively to it',
+						reason: 'The agent was speaking clearly with good pronunciation at a good pace',
 					},
 				},
 				'Staff name': {
 					'Reinforce agent name': {
 						match: true,
 						score: 5,
-						reason: 'The agent used the comperency and the customer reacted positively to it',
+						reason: 'The agent was speaking clearly with good pronunciation at a good pace',
 					},
 				},
 				'Tone of voice': {
 					'Friendly and energetic & Intelligible close': {
 						match: true,
 						score: 5,
-						reason: 'The agent used the comperency and the customer reacted positively to it',
+						reason: 'The agent was speaking clearly with good pronunciation at a good pace',
 					},
 				},
 				Closure: {
 					'Use the standard contact closing script': {
 						match: true,
 						score: 5,
-						reason: 'The agent used the comperency and the customer reacted positively to it',
+						reason: 'The agent was speaking clearly with good pronunciation at a good pace',
 					},
 				},
 			},

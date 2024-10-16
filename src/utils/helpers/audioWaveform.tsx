@@ -44,10 +44,10 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, hovere
 			wsRegions.clearRegions();
 
 			const regionMapping = {
-				Greeting: { start: 0, end: 15 },
-				Understanding: { start: 15, end: 30 },
-				Helping: { start: 30, end: 45 },
-				'Getting Agreement': { start: 45, end: 70 },
+				Greeting: { start: 0, end: 8 },
+				Understanding: { start: 8, end: 17 },
+				Helping: { start: 17, end: 59 },
+				'Getting Agreement': { start: 59, end: 70 },
 				Farewell: { start: 70, end: 80 },
 			} as any;
 

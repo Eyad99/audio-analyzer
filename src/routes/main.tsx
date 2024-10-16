@@ -12,10 +12,10 @@ const MainRoutes = [
 		component: <Dashboard />,
 	},
 	{
-		name: 'Staffs',
+		name: 'Staff',
 		layout: '/',
 		icon: <Users />,
-		path: '/staffs',
+		path: '/staff',
 		component: <></>,
 	},
 	{

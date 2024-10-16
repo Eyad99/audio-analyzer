@@ -51,7 +51,7 @@ const Transcription: FC<TranscriptionProps> = ({
 					<p className='text-md'>{transcribedText}</p>
 				</ScrollArea> */}
 
-					<div className='grid grid-cols-1'>
+					<div className='grid grid-cols-1 mb-4'>
 						<SentimentAndSilence allData={allData} />
 					</div>
 					<div className='grid grid-cols-2 gap-4'>
@@ -89,7 +89,7 @@ const Transcription: FC<TranscriptionProps> = ({
 							<div className='grid grid-cols-2'>
 								<div className='col-span-2 md:col-span-1'>
 									<CardHeader>
-										<CardTitle className='text-sm text-[#4F4A85] font-bold'>Total Spoken Time</CardTitle>
+										<CardTitle className='text-sm text-[#4F4A85] font-bold'>Total Talk Time</CardTitle>
 									</CardHeader>
 									<CardContent>
 										<p className='text-2xl font-semibold'>{duration} s</p>
@@ -119,7 +119,7 @@ const Transcription: FC<TranscriptionProps> = ({
 							<div className='grid grid-cols-2'>
 								<div className='col-span-2 md:col-span-1'>
 									<CardHeader>
-										<CardTitle className='text-sm text-[#4F4A85] font-bold'>Number of Hold and silence</CardTitle>
+										<CardTitle className='text-sm text-[#4F4A85] font-bold'>Number Of Hold And Silence</CardTitle>
 									</CardHeader>
 									<CardContent className='flex gap-3'>
 										<p className='text-2xl font-semibold'>Hold 1</p>
@@ -139,7 +139,7 @@ const Transcription: FC<TranscriptionProps> = ({
 							{silenceSegments}
 						</Badge>
 					</div>
-					<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+					<div className=' flex justify-center items-center'>
 						<StagesOfACall />
 					</div>
 				</CardContent>

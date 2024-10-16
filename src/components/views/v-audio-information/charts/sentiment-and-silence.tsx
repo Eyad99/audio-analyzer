@@ -220,7 +220,7 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 					</div>
 				}
 			/>
-			<div className='h-fit p-[20px] flex flex-col gap-4 col-span-1 md:col-span-1 sm:col-span-2 sm-max:col-span-2 rounded-[20px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:shadow-none  transform transition-transform duration-500 hover:translate-y-[-10px] hover:shadow-[0_0_40px_rgba(8,21,66,0.05)] '>
+			<div className='h-fit p-[20px] flex flex-col gap-4 col-span-1 md:col-span-1 sm:col-span-2 sm-max:col-span-2 rounded-[20px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:shadow-none  transform transition-transform duration-500 hover:translate-y-[-10px] shadow-[0_0_40px_rgba(8,21,66,0.05)] '>
 				<div className='flex justify-between'>
 					<h2 className='text-lg font-bold text-[#4F4A85] dark:text-white'>Sentiment and Silence Segments Over Time</h2>
 					<div className='flex gap-2 items-center'>
