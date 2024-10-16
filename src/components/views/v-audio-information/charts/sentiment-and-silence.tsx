@@ -65,28 +65,24 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 		},
 	];
 
-	// const silenceDatasets = [
+	// const holdDatasets = [
 	// 	{
-	// 	  label: `Silence Segment ${1}`,
-	// 	  data: [
-	// 		{ x: 5.8, y: 0 }, // Start point at x = 5.8
-	// 		{ x: 10, y: 0 },  // End point at x = 10
-	// 	  ],
-	// 	  borderColor: 'rgba(255, 165, 0, 0.8)',
-	// 	  backgroundColor: 'rgba(255, 255, 0, 0.2)',
-	// 	  borderDash: [15, 15], // Dashed line
-	// 	  fill: false, // Ensure it doesn't fill the area under the line
-	// 	  tension: 0, // Straight line between points
+	// 		label: `Hold Segment ${1}`,
+	// 		data: [{ x: 34.5, y: 0 }],
+	// 		borderColor: 'rgba(0, 165, 255, 0.8)',
+	// 		backgroundColor: 'rgba(0, 255, 255, 0.2)',
+	// 		borderDash: [15, 15],
+	// 		pointRadius: 15,
 	// 	},
-	//   ];
+	// ];
+
 	const holdDatasets = [
 		{
 			label: `Hold Segment ${1}`,
-			data: [{ x: 34.5, y: 0 }],
-			borderColor: 'rgba(0, 165, 255, 0.8)',
-			backgroundColor: 'rgba(0, 255, 255, 0.2)',
-			borderDash: [15, 15],
-			pointRadius: 15,
+			data: [{ x: 34.5, y: 0.5 }],
+			type: 'bar',
+			backgroundColor: 'rgba(128, 128, 128, 0.3)',
+			barThickness: 30, // Adjust the bar width
 		},
 	];
 
@@ -180,8 +176,8 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 				},
 			},
 			y: {
-				min: -1,
-				max: 1,
+				// min: -1,
+				// max: 1,
 				title: {
 					display: true,
 					text: 'Sentiment',
@@ -201,7 +197,7 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 						<div className='flex justify-between'>
 							<h2 className='text-lg font-bold text-[#4F4A85] dark:text-white'>Sentiment and Silence Segments Over Time</h2>
 						</div>
-						<Line data={lineData} options={options as any} ref={chartRef} />
+						<Line data={lineData as any} options={options as any} ref={chartRef} />
 					</div>
 				}
 			/>
@@ -212,10 +208,132 @@ const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
 						<Maximize className='cursor-pointer' onClick={() => setIsOpen(true)} />
 					</div>
 				</div>
-				<Line data={lineData} options={options as any} ref={chartRef} />
+				<Line data={lineData as any} options={options as any} ref={chartRef} />
 			</div>
 		</React.Fragment>
 	);
 };
 
 export default SentimentAndSilence;
+
+// import React, { FC, useRef, useState } from 'react';
+// import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend } from 'chart.js';
+// import { Maximize } from 'lucide-react';
+// import { Line } from 'react-chartjs-2';
+// import EControlledDialog from '@/components/reusable/dialog/controlled-dialog';
+
+// ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
+
+// interface SentimentAndSilenceProps {
+// 	allData: any;
+// }
+
+// const SentimentAndSilence: FC<SentimentAndSilenceProps> = ({ allData }) => {
+// 	const chartRef = useRef(null);
+// 	const [isOpen, setIsOpen] = useState(false);
+
+// 	const sentimentData = allData.data.reduce((acc: any, segment: any) => {
+// 		if (!acc[segment.speaker]) {
+// 			acc[segment.speaker] = [];
+// 		}
+// 		acc[segment.speaker].push({
+// 			x: segment.end,
+// 			y: segment.sentiment,
+// 		});
+// 		return acc;
+// 	}, {});
+
+// 	const sentimentDatasets = Object.keys(sentimentData).map((speaker, index) => {
+// 		const colors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)'];
+// 		return {
+// 			label: `${speaker} - Sentiment`,
+// 			data: sentimentData[speaker],
+// 			borderColor: colors[index % colors.length],
+// 			backgroundColor: colors[index % colors.length].replace('1)', '0.2)'),
+// 			tension: 0.1,
+// 			fill: false,
+// 		};
+// 	});
+
+// 	const holdDatasets = [
+// 		{
+// 			label: `Hold Segment ${1}`,
+// 			data: [{ x: 34.5, y: 0.5 }],
+// 			type: 'bar',
+// 			backgroundColor: 'rgba(0, 165, 255, 0.4)',
+// 			barThickness: 10, // Adjust the bar width
+// 		},
+// 	];
+
+// 	const lineData = {
+// 		labels: [],
+// 		datasets: [...sentimentDatasets, ...holdDatasets],
+// 	};
+
+// 	const options = {
+// 		responsive: true,
+// 		plugins: {
+// 			tooltip: {
+// 				callbacks: {
+// 					label: function (context: any) {
+// 						if (context.dataset.label.includes('Hold Segment')) {
+// 							return `Hold Duration at ${context.raw.x}s`;
+// 						}
+// 						return context.dataset.label;
+// 					},
+// 				},
+// 			},
+// 		},
+// 		scales: {
+// 			x: {
+// 				type: 'linear',
+// 				title: {
+// 					display: true,
+// 					text: 'Time (s)',
+// 				},
+// 				ticks: {
+// 					callback: function (value: any) {
+// 						return `${value.toFixed(2)}s`;
+// 					},
+// 				},
+// 			},
+// 			// y: {
+// 			// 	min: -1,
+// 			// 	max: 1,
+// 			// 	title: {
+// 			// 		display: true,
+// 			// 		text: 'Sentiment',
+// 			// 	},
+// 			// },
+// 		},
+// 	};
+
+// 	return (
+// 		<React.Fragment>
+// 			<EControlledDialog
+// 				isOpen={isOpen}
+// 				setOpen={setIsOpen}
+// 				contentClassName='!max-w-[1200px] sm:max-w-fit sm-max:max-w-fit'
+// 				dialogBody={
+// 					<div>
+// 						<div className='flex justify-between'>
+// 							<h2 className='text-lg font-bold text-[#4F4A85] dark:text-white'>Sentiment and Silence Segments Over Time</h2>
+// 						</div>
+// 						<Line data={lineData as any} options={options as any} ref={chartRef} />
+// 					</div>
+// 				}
+// 			/>
+// 			<div className='h-fit p-[20px] flex flex-col gap-4 col-span-1 md:col-span-1 sm:col-span-2 sm-max:col-span-2 rounded-[20px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:shadow-none  transform transition-transform duration-500 hover:translate-y-[-10px] hover:shadow-[0_0_40px_rgba(8,21,66,0.05)] '>
+// 				<div className='flex justify-between'>
+// 					<h2 className='text-lg font-bold text-[#4F4A85] dark:text-white'>Sentiment and Silence Segments Over Time</h2>
+// 					<div className='flex gap-2 items-center'>
+// 						<Maximize className='cursor-pointer' onClick={() => setIsOpen(true)} />
+// 					</div>
+// 				</div>
+// 				<Line data={lineData as any} options={options as any} ref={chartRef} />
+// 			</div>
+// 		</React.Fragment>
+// 	);
+// };
+
+// export default SentimentAndSilence;
