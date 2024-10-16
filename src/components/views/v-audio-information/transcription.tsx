@@ -39,8 +39,8 @@ const Transcription: FC<TranscriptionProps> = ({
 			<CardHeader className=''>
 				<CardTitle className='flex justify-between text-[#4F4A85] font-bold'>
 					Transcription Result
-					<Button variant='outline' size='sm' onClick={() => setOpenCollapse(!openCollapse)}>
-						<div className='  text-gray-600'>{openCollapse ? <ChevronUp size={20} /> : <ChevronDown size={20} />}</div>
+					<Button size='sm' onClick={() => setOpenCollapse(!openCollapse)}>
+						<div className='text-white'>{openCollapse ? <ChevronUp size={20} /> : <ChevronDown size={20} />}</div>
 					</Button>
 				</CardTitle>
 			</CardHeader>
@@ -50,6 +50,10 @@ const Transcription: FC<TranscriptionProps> = ({
 					{/* <ScrollArea className='h-[200px] w-full rounded-md border p-4 mb-4'>
 					<p className='text-md'>{transcribedText}</p>
 				</ScrollArea> */}
+
+					<div className='grid grid-cols-1'>
+						<SentimentAndSilence allData={allData} />
+					</div>
 					<div className='grid grid-cols-2 gap-4'>
 						<Card className={cardClassName}>
 							<div className='grid grid-cols-2'>
@@ -62,7 +66,7 @@ const Transcription: FC<TranscriptionProps> = ({
 									</CardContent>
 								</div>
 								<div className='col-span-1 md:flex items-center justify-end px-6 hidden'>
-									<img src={DurationImage} alt='Duration' width={50} />
+									<img src={DurationImage} alt='Duration' width={40} />
 								</div>
 							</div>
 						</Card>
@@ -77,7 +81,7 @@ const Transcription: FC<TranscriptionProps> = ({
 									</CardContent>
 								</div>
 								<div className='col-span-1 md:flex items-center justify-end px-6 hidden'>
-									<img src={SilenceImage} alt='Silence' width={50} />
+									<img src={SilenceImage} alt='Silence' width={40} />
 								</div>
 							</div>
 						</Card>
@@ -92,7 +96,7 @@ const Transcription: FC<TranscriptionProps> = ({
 									</CardContent>
 								</div>
 								<div className='col-span-1 md:flex items-center justify-end px-6 hidden'>
-									<img src={SpockImage} alt='Spock' width={50} />
+									<img src={SpockImage} alt='Spock' width={40} />
 								</div>
 							</div>
 						</Card>
@@ -107,7 +111,7 @@ const Transcription: FC<TranscriptionProps> = ({
 									</CardContent>
 								</div>
 								<div className='col-span-1 md:flex items-center justify-end px-6 hidden'>
-									<img src={NoiseImage} alt='Noise' width={50} />
+									<img src={NoiseImage} alt='Noise' width={40} />
 								</div>
 							</div>
 						</Card> */}
@@ -124,7 +128,7 @@ const Transcription: FC<TranscriptionProps> = ({
 									</CardContent>
 								</div>
 								<div className='col-span-1 md:flex items-center justify-end px-6 hidden'>
-									<img src={NoiseImage} alt='Noise' width={50} />
+									<img src={NoiseImage} alt='Noise' width={40} />
 								</div>
 							</div>
 						</Card>
@@ -136,7 +140,6 @@ const Transcription: FC<TranscriptionProps> = ({
 						</Badge>
 					</div>
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-						<SentimentAndSilence allData={allData} />
 						<StagesOfACall />
 					</div>
 				</CardContent>

@@ -24,9 +24,9 @@ const Speakers: FC<SpeakersProps> = ({ segments }) => {
 		<Card>
 			<CardHeader className=''>
 				<CardTitle className='flex justify-between text-[#4F4A85] font-bold'>
-					Speakers and Segments Analysis
-					<Button variant='outline' size='sm' onClick={() => setOpenCollapse(!openCollapse)}>
-						<div className='  text-gray-600'>{openCollapse ? <ChevronUp size={20} /> : <ChevronDown size={20} />}</div>
+					View Speakers and Segments Analysis
+					<Button size='sm' onClick={() => setOpenCollapse(!openCollapse)}>
+						<div className='text-white'>{openCollapse ? <ChevronUp size={20} /> : <ChevronDown size={20} />}</div>
 					</Button>
 				</CardTitle>
 			</CardHeader>

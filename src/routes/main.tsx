@@ -26,10 +26,10 @@ const MainRoutes = [
 		component: <></>,
 	},
 	{
-		name: 'Audio Analisis',
+		name: 'Audio Analysis',
 		layout: '/',
 		icon: <AudioLines />,
-		path: '/audio-analisis',
+		path: '/audio-analysis',
 		component: <MainPage />,
 	},
 

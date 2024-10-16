@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { ChevronDown, ChevronUp, Pause, Play, Pencil } from 'lucide-react';
+import { ChevronDown, ChevronUp, Pause, Play, Pencil, Download } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnalysisData, CriteriaGroupProps } from '@/core';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import AudioWaveform from '@/utils/helpers/audioWaveform';
 import TextField from '@/components/reusable/fields/TextField';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 interface QaProps {
 	criteriaAnalysis: AnalysisData;
@@ -193,30 +194,57 @@ function CriteriaGroup({
 										)}
 										<div className='flex items-center gap-4'>
 											{/* Edit Score */}
-											{value.score !== 'Y' && (
-												<TooltipProvider>
-													<Tooltip>
-														<TooltipTrigger asChild>
-															<Pencil className='text-[#383351]' size={20} onClick={() => handleSelectScoreToEditIt(key)} />
-														</TooltipTrigger>
-														<TooltipContent>
-															<span>Edit on score</span>
-														</TooltipContent>
-													</Tooltip>
-												</TooltipProvider>
-											)}
+											<TooltipProvider>
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Pencil className='text-[#383351]' size={20} onClick={() => handleSelectScoreToEditIt(key)} />
+													</TooltipTrigger>
+													<TooltipContent>
+														<span>Edit on score</span>
+													</TooltipContent>
+												</Tooltip>
+											</TooltipProvider>
 
 											{/*  Score */}
 											{editScore === key ? (
-												<TextField
-													name={'reason'}
-													onBlur={() => handleSelectScoreToEditIt('')}
-													onChange={(event) => handeEditOnScore(parentName, name, key, event.target.value)}
-													type={'number'}
-													min={1}
-													max={5}
-													onKeyDown={(event) => event.key === 'Enter' && handleSelectScoreToEditIt('')}
-												/>
+												value.score === 'Yes' || value.score === 'No' ? (
+													<DropdownMenu>
+														<DropdownMenuTrigger>
+															<div className='flex gap-2 text-gray-600'>
+																<span>Change Reason</span>
+																<ChevronDown />
+															</div>
+														</DropdownMenuTrigger>
+														<DropdownMenuContent>
+															<DropdownMenuItem
+																onClick={() => {
+																	handeEditOnScore(parentName, name, key, 'Yes');
+																	handleSelectScoreToEditIt('');
+																}}
+															>
+																<span> Yes</span>
+															</DropdownMenuItem>
+															<DropdownMenuItem
+																onClick={() => {
+																	handeEditOnScore(parentName, name, key, 'No');
+																	handleSelectScoreToEditIt('');
+																}}
+															>
+																<span> No</span>
+															</DropdownMenuItem>
+														</DropdownMenuContent>
+													</DropdownMenu>
+												) : (
+													<TextField
+														name={'reason'}
+														onBlur={() => handleSelectScoreToEditIt('')}
+														onChange={(event) => handeEditOnScore(parentName, name, key, event.target.value)}
+														type={'number'}
+														min={1}
+														max={5}
+														onKeyDown={(event) => event.key === 'Enter' && handleSelectScoreToEditIt('')}
+													/>
+												)
 											) : (
 												<span
 													className={
@@ -224,6 +252,8 @@ function CriteriaGroup({
 															? 'text-red-500'
 															: [3, 4]?.includes(+value?.score)
 															? 'text-blue-500'
+															: value?.score === 'No'
+															? 'text-red-500'
 															: 'text-green-500'
 													}
 												>

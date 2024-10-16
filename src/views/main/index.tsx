@@ -309,21 +309,19 @@ const MainPage = () => {
 			'Getting Agreement': {
 				'Process knowledge': {
 					'Complete and accurate information was provided as per the process': {
-						match: false,
-						score: 1,
-						reason: 'There was no reason to use this competency at this time in this call and/or the agent was ustified in not using it.',
+						match: true,
+						score: 4,
 					},
 				},
 				'Technical Ticket/ Complaint Handling ': {
 					'Registered the technical ticket/complaint accurately and didn’t miss out any important field': {
-						match: false,
-						score: 5,
-						reason: 'The agent usedmeet the standard requirements.',
+						match: true,
+						score: 3,
 					},
 				},
 				'Systems Usage': {
 					'Use of appropriate resources/systems to address the query and provide': {
-						match: false,
+						match: true,
 						score: 3,
 					},
 					'Updating correct and complete customer’s information and ticket details on': {
@@ -414,53 +412,53 @@ const MainPage = () => {
 				'Fatal Errors': {
 					'Customer abuse': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Incorrect information/ advice': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Contravening Ministry polices': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Failure to complete actions as promised to customer': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					Misrepresentation: {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 				},
 				'Customer Related': {
 					'Customer praise for the call': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Customer praise for the company': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Customer objection to queue': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Customer objection to agent behavior': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Customer objection to policy': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Customer objection to technology': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					'Customer objection to other department': {
 						match: true,
-						score: 'Y',
+						score: 'Yes',
 					},
 					Greeting: {
 						match: true,

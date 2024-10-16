@@ -22,7 +22,7 @@ const AudioWaveform: React.FC<AudioWaveformProps> = ({ audioUrl, playing, hovere
 	const defaultRegions = [
 		{ start: 5, end: 6, color: `rgba(255,255,0, 0.5)` },
 		{ start: 34.5, end: 38, color: `rgba(0,255,0, 0.5)` },
-		{ start: 41, color: `rgba(255,0,0, 0.5)` },
+		{ start: 41, end: 42, color: `rgba(255,0,0, 0.5)` },
 	];
 
 	const addRegion = useCallback(
